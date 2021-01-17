@@ -7,6 +7,7 @@ export default function App() {
   console.log(Platform.OS);
   // console.log(Platform.);
   return (
+    
     <View style={styles.container}>
       <Text> world</Text>
       <StatusBar style="auto" />
