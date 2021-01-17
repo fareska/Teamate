@@ -1,0 +1,84 @@
+Sign In :
+
+# sign up with facebook
+# sign up with form 
+# forgot password (Email/ mobile)
+# sign in -- email + password
+
+
+Sign up :
+first name , last name,mobile number, country+City, enter sports you interested in,
+email+password, signUp date (fun, not input) , birthday female/male   . 
+   
+
+# re-enter password and number (not copy) 
+# email varification 
+# no spical charchters in the password (. * @ / \ + =...)
+# email dose not exist in DB
+
+event page:
+#add event - define the following: sport, recursion, date, num of persons, location, description
+#search event - by the following: sport, date, location 
+#desplay the events by date .
+#display the events on a map.
+#filter search :  sport + location + time + friend
+# add comment to an event
+# ask to join an event
+# send notfication to the event maker when a user asks to join.
+# get the last search
+# add event to calender
+# see the event participants.
+
+
+Profile Puplice page:
+# add friend / follow  
+# send a message
+# 
+
+Profile (personal) page:
+#uplode picture
+# see notfication 
+# remove a friend 
+# accepte friend request
+#edit profile (user details, friends, events etc..).
+
+personal profile
+profile pic
+bio
+{
+display all fields of sign up page
+fname: name of the user
+lname: lname of the user
+password ( can be changed )
+location: ..
+email: unchangeable
+gender
+birthday
+favorite sports
+phone(optional)
+}
+
+functions=>
+update profile (apply new changes on click, email cannot be changed)
+cancel button (redirect back to home page or something)
+================================================================================
+
+
+functions = >
+add friend (follow like, user adds friends as static pages where he can check out his profile => remove friend)
+add firned super low priority (have to add friend requests page, so the other user can accept/reject the request)
+
+==========================================================
+
+events page{
+search dropdown(sport, ) go button!
+
+sports do not build character they reval it.
+
+}
+
+
+
+
+
+

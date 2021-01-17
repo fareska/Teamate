@@ -1,0 +1,105 @@
+BACKEND ROUTES ->
+
+loginPage
+{
+	post Request => /login/:email/:password => check validation => return success/fail
+}
+
+signUpPage{
+	post Request => /signUp,({body}) => check if mail doesnt already exist in DB, if success save new Info => return success/fail
+}
+
+privateProfilePage{
+	get Request => /personal/events => access DB => return personal events
+	get Request => /personal/friends => access DB => return personal friends
+	get Request => /personal/bio => access DB => return my own info
+
+	put Request => /personal, ({body}) => update user's data in DB => return success
+
+	delete Request => /personal/:eventId => delete event from DB => return success
+}
+
+publicProfilePage{
+	get Request => /events/:profileId => access DB => return profile's events
+	get Request => /friends/:profileId => access DB => return profile's friends
+	get Request => /bio/:profileId => access DB => return profile's info
+
+	post Request => /follow/:profileId => save that person's ID in friends Array of current user => return success
+	^^^^^^^^^^^^must be disccused later^^^^^^^^^^^^^
+}
+
+eventsPage{
+	get Request => /events/search?query => check query & access DB => return events accordingly
+	
+	post Request => /event, ({body}) => save event in DB => return success
+	
+	put Request => /event, ({body}) => update given event => return success
+}
+
+*note: get reqs cant be set together, we have to talk about it later
+==========================================================================
+
+FRONTEND ROUTES ->
+
+loginPage{
+	axios.get(send email+pass) => if response == success => route to events else recheck pass/mail
+	onClick signUp => route to signUp page
+}
+
+signUpPage{
+	axios.post(send body) => if res == suc => route back to login else recheck data
+}
+
+publicProfilePage{
+	axios.get(user's info) => render data
+	axios.get(user's friends) => render data
+	axios.get(user's events) => render data
+	
+	axios.post(add onClick follow's user to my DB) => render unfollow button
+}
+
+privateProfilePage{
+	axios.get(personal info) => render data
+	axios.get(personal friends) => render data
+	axios.get(personal events) => render data
+	
+	axios.put(update personal info in DB) => re-render page with updated info
+	
+	axios.delete(eventId) => re-render with deleted event (so just delete)
+}
+
+eventsPage{
+	axios.get(events?query) => render query events
+	
+	axios.post({body} (event's info)) => render saved event
+	
+	axios.post({body}) => re-render updated event
+}
+
+*note: get reqs cant be set together, we have to talk about it later
+=============================================================================
+
+SQL or MONGO: TBD
+
+PersonSchema{
+	_id
+	fname
+	lname
+	email
+	password
+	country
+	city
+	birthday
+	gender
+	bio
+	profilePic
+}
+
+eventSchema{
+	sportsArray
+	recursion??????????
+	date
+	numofpeople
+	location
+	desciription
+}
