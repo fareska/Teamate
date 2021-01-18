@@ -1,5 +1,8 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "engine": {
+    "node": "14.6.0"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -21,7 +24,8 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "expo-cli": "^4.0.17"
   },
   "private": true
 }
