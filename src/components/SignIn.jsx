@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Platform, TextInput, TouchableOpacity,  } from 'react-native';
+import { Text, View, Platform, TextInput, TouchableOpacity } from 'react-native';
 
     import AsyncStorage from '@react-native-community/async-storage'
 
@@ -9,7 +9,7 @@ const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 
 const SignIn = () => {
     // AsyncStorage.setItem('test','hello world!')
-    AsyncStorage.getItem('test').then(res => console.log(res))
+    // AsyncStorage.getItem('test').then(res => console.log(res))
     return (
         <View style={styles.signIn}>
             

@@ -127,6 +127,12 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontWeight: '600',
     },
+    dismissKeyboard:{
+        position: 'absolute',
+        width:'100%',
+        height:'100%',
+        
+    }
 
 
 
