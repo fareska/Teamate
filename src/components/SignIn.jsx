@@ -1,21 +1,25 @@
 import React from 'react'
 import { Text, View, Platform, TextInput, TouchableOpacity } from 'react-native';
 
-    import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage'
 
-import { styles as webStyles } from '../styles/webStyles'
-import { styles as mobileStyles } from '../styles/mobileStyles'
+import { styles as webStyles } from '../styles/web/SignIn'
+import { styles as mobileStyles } from '../styles/mobile/SignIn'
+import { inject, observer } from 'mobx-react';
+import SwipableView from './subComponent/SwipableView';
 const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 
-const SignIn = () => {
+const SignIn = inject('navigator')(observer(({navigator}) => {
+
     // AsyncStorage.setItem('test','hello world!')
     // AsyncStorage.getItem('test').then(res => console.log(res))
+
     return (
-        <View style={styles.signIn}>
+        <SwipableView style={styles.signIn}>
             
             <View style={styles.logoContainer}>
                 <View style={styles.circle}></View>
-                <Text style={styles.logo}>Teamate</Text>
+                <Text style={styles.logo}>TeaMate</Text>
             </View>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Sign in</Text>
@@ -47,11 +51,11 @@ const SignIn = () => {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>console.log('touched')} style={styles.signUpBtn}>
-                    <Text style={styles.sinUpBtnText}>Sign up</Text>
+                    <Text style={styles.sinUpBtnText} onPress={()=>navigator.redirect('signUp')}>Sign up</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SwipableView>
     )
-}
+}))
 
 export default SignIn

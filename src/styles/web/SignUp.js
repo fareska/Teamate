@@ -1,17 +1,8 @@
 import { Platform, StyleSheet } from 'react-native'
-import { colors } from './COLORS'
+import { colors } from '../COLORS'
 const { primary, secondary } = colors
 
 const styles = StyleSheet.create({
-
-    container: {
-        flex: 1,
-        width: "100%",
-        paddingTop: Platform.OS === "android" ? 20 : 0,
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir-Light"
-    },
 
     signIn: {
         flex: 1,
@@ -22,25 +13,6 @@ const styles = StyleSheet.create({
         paddingRight: '5%',
 
     },
-
-    logoContainer: {
-        flex: 0.7,
-        width: "100%",
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-    },
-    circle:{
-        width: 60,
-        height: 60,
-        borderRadius:30,
-        backgroundColor: primary,
-    },
-    logo: {
-        fontSize: 40,
-        textAlign: 'center',
-        fontWeight: '900'
-    },
-
     titleContainer: {
         flex: 0.5,
         width: "100%",
@@ -127,12 +99,22 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontWeight: '600',
     },
-    dismissKeyboard:{
-        position: 'absolute',
+    signUpScrollable:{
+      flex:1,
         width:'100%',
         height:'100%',
-        
-    }
+       position:'absolute'
+
+      },
+      signUp: {
+        flex: 1,
+        width: "90%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: '5%',
+        paddingRight: '5%',
+    },
+    
 
 
 

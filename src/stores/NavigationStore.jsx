@@ -6,6 +6,7 @@ class NavigationStore {
         makeObservable(this,{
             history:observable,
             redirect: action,
+            previous:action,
             currentPage:computed
         })
     }

@@ -1,30 +1,11 @@
 import { Platform, StyleSheet } from 'react-native'
-import { colors } from './COLORS'
+import { colors } from '../COLORS'
 const { primary, secondary } = colors
 
 const styles = StyleSheet.create({
-
-    container: {
-        flex: 1,
-        width: "100%",
-        paddingTop: Platform.OS === "android" ? 20 : 0,
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir-Light"
-    },
-
-    signIn: {
-        flex: 1,
-        width: "90%",
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: '5%',
-        paddingRight: '5%',
-
-    },
-
     logoContainer: {
-        flex: 0.7,
+        marginTop:40,
+        marginBottom:40,
         width: "100%",
         alignItems: 'center',
         justifyContent: 'flex-end',
@@ -40,11 +21,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '900'
     },
-
+    signUp: {
+        flex: 1,
+        width: "90%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: '5%',
+        paddingRight: '5%',
+    },
     titleContainer: {
-        flex: 0.5,
         width: "100%",
         justifyContent: 'flex-end',
+        marginTop:30,
+        marginBottom:30,
     },
     title: {
         fontWeight: "700",
@@ -58,7 +47,6 @@ const styles = StyleSheet.create({
     },
 
     signInInputsContainer: {
-        flex: 1,
         width: "100%",
         alignItems:'flex-start',
         flexDirection:'column',
@@ -70,7 +58,8 @@ const styles = StyleSheet.create({
         fontWeight:'600',
     },
     inputContainer:{
-        width:'100%'
+        width:'100%',
+        marginTop: 30
     },
     input:{
         width:'100%',
@@ -79,18 +68,20 @@ const styles = StyleSheet.create({
         borderBottomWidth:1,
         fontSize: 20,
 
+
     },
     signInBtnContainer: {
-        flex: 1,
+        height: 250,
         width: "100%",
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'center',
+        marginBottom:40
     },
     touchableButton:{
         width: '90%',
         height: 40,
         borderRadius: 8,
-        marginBottom: 10,
+       margin:50,
        
     },
     signInBtn: {
@@ -100,40 +91,34 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: primary
+        backgroundColor: primary,
     },
-    signInBtnFacebook:{
-        color: 'white',
-        width: "100%",
-        height: '100%',
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#3b5998'
-    },
+ 
     btnText:{
         color:'white',
         fontSize:15,
         fontWeight: '600',
     },
+
     signUpBtn:{
-       
        alignSelf: 'flex-end',
        marginRight: '10%'
-
     },
     sinUpBtnText:{
         color: primary,
         fontSize:15,
         fontWeight: '600',
     },
-    dismissKeyboard:{
-      position: 'absolute',
-      width:'100%',
-      height:'100%', 
-  }
-
-
+    signUpScrollable:{
+      flex:1,
+        width:'100%',
+        height:'100%',
+        
+      },
+      signUpScrollableContainer:{
+          alignItems:'center'
+      }, 
+    
 
 });
 
