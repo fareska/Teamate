@@ -4,21 +4,12 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 export class Client {
     constructor () {
-        
+        this.user = {}
+        this.friends = []
+        this.events = []
 
         makeAutoObservable(this,{
-            first: observable,
-            last: observable,
-            mobile: observable,
-            country: observable,
-            city: observable,
-            email: observable,
-            password: observable,
-            birthday: observable,
-            date: observable,
-            image: observable,
-            gender: observable,
-            active: observable,
+            user: observable,
             friends: observable,
             events: observable,
             sign_in: action,
@@ -32,19 +23,10 @@ export class Client {
 
     assingNewValues = (user) => {
         if(!user) return 
-        this.first= user.first,
-        this.last= user.last,
-        this.mobile= user.mobile,
-        this.country= user.country,
-        this.city= user.city,
-        this.email= user.email,
-        this.password= user.password,
-        this.birthday= user.birthday,
-        this.date= user.date,
-        this.image= user.image,
-        this.gender= user.gender,
-        this.active= user.active,
-        this.friends= user.friends,
+        this.user= user.userObj
+        if(user.id)
+            AsyncStorage.setitems('id',user.id)
+        this.friends= user.friends
         this.events= user.events
     }
 
@@ -54,17 +36,22 @@ export class Client {
         const user = await null
         this.assingNewValues(user)
     }
-    sign_out = () => {
- 
-    }
+    sign_out = () => AsyncStorage.setitems('id',null)
     sign_up = async data => {
-
+        //TBD api sign up
+        const user = await null
+        this.assingNewValues(user)
     }
     create_event = async event => {
-
+        //TBD api create event
+        const event = await null
+        if(event)
+            this.events.splice(0,0,event)
     }
     get_events = async () => {
-
+        //TBD api get events
+        const events = await null
+        this.events = events
     }
     get_user_by_id = async id => {
         //TBD api call
@@ -73,32 +60,3 @@ export class Client {
     }
     
 }
-
-
-// {
-//     userObj:
-//     {
-//         first:"fname",
-//         last:"lname",
-//         mobile:"string",
-//         country:"country",
-//         city:"city",
-//         email:"email",
-//         password:"string",
-//         birthday:"string",
-//         date:"INT",
-//         image:"string",
-//         gender: BOOL,
-//         active: BOOL
-//         }
-//     friends:
-//         [{"friendName":"fName","image":"string"}]
-//     events:
-//         [
-//         0:{sport:"string", frequency:INT, date:"string", time:"string", people_num: INT, city:"city", country:"country", description:"string", active: BOOLEAN}
-//         1:{sport:"string", frequency:INT, date:"string", time:"string", people_num: INT, city:"city", country:"country", description:"string", active: BOOLEAN}
-//         2:{sport:"string", frequency:INT, date:"string", time:"string", people_num: INT, city:"city", country:"country", description:"string", active: BOOLEAN}
-//         3:{sport:"string", frequency:INT, date:"string", time:"string", people_num: INT, city:"city", country:"country", description:"string", active: BOOLEAN}
-//         4:{sport:"string", frequency:INT, date:"string", time:"string", people_num: INT, city:"city", country:"country", description:"string", active: BOOLEAN}
-//         ]
-// }
