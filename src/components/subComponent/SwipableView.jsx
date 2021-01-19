@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React from 'react'
-import { View, Keyboard } from 'react-native'
+import { View, Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 const SwipableView = inject('navigator')(observer(({ navigator, children, style }) => {
     let touchArrX = []
@@ -27,10 +27,14 @@ const SwipableView = inject('navigator')(observer(({ navigator, children, style 
     return (
         <View style={style}
             onStartShouldSetResponder={(e) => true}
+            onResponderMove={trackTouch}
             onTouchMove={trackTouch}
-            onResponderRelease={handleReleaseTouch}>
-
+            onMomentumScrollEnd={handleReleaseTouch}
+            onResponderRelease={handleReleaseTouch}
+            >
+            
             {children}
+            
 
         </View>
     )

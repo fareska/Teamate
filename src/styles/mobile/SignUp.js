@@ -59,16 +59,30 @@ const styles = StyleSheet.create({
     },
     inputContainer:{
         width:'100%',
-        marginTop: 30
+        height:100,
+        marginTop: 20
+    },
+    pickerContainer:{
+        width:'100%',
+        height:Platform.OS === 'ios'?200: 100,
+        marginTop: 30,
+        zIndex:10
     },
     input:{
         width:'100%',
         borderBottomColor:"darkgrey",
         borderStyle:'solid',
         borderBottomWidth:1,
+        fontSize: 30,
+    },
+    picker:{
+        marginTop:Platform.OS === 'ios'? 0:30,
+        top:Platform.OS === 'ios'? -10:0,
+        width:'100%',
+        height:30,
+        borderBottomColor:"darkgrey",
+        borderStyle:'solid',
         fontSize: 20,
-
-
     },
     signInBtnContainer: {
         height: 250,
