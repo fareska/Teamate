@@ -1,6 +1,7 @@
 
 import { observable, action, makeAutoObservable } from 'mobx'
 import apiManager from '../api'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export class Client {
     constructor (c,cById,oById,eById) {
