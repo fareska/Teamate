@@ -1,62 +1,77 @@
 
 import { observable, action, makeAutoObservable } from 'mobx'
-import apiManager from '../api'
 import AsyncStorage from '@react-native-community/async-storage'
 
 export class Client {
-    constructor (c,cById,oById,eById) {
-        this.cById = cById
-        this.oById = oById
-        this.eById = eById
+    constructor () {
         
-        this.assingNewValues(c)
-
-        //testtttt
 
         makeAutoObservable(this,{
-            last: observable,
             first: observable,
-            email: observable,
-            sold: observable,
-            date: observable,
-            email_type_id: observable,
-            owner_id: observable,
-            country_id: observable,
+            last: observable,
+            mobile: observable,
             country: observable,
-            owner: observable,
-            email_type: observable,
-            cl_updateClient: action,
-            ac_transfer: action
+            city: observable,
+            email: observable,
+            password: observable,
+            birthday: observable,
+            date: observable,
+            image: observable,
+            gender: observable,
+            active: observable,
+            friends: observable,
+            events: observable,
+            sign_in: action,
+            sign_out: action,
+            sign_up: action,
+            create_event: action,
+            get_events: action,
+            get_user_by_id: action
         })
     }
 
-    assingNewValues = (c) => {
-        if(!c) return 
-        this.id= c.id
-        this.last= c.last
-        this.first= c.first
-        this.email= c.email
-        this.sold= c.sold
-        this.date= c.date
-        this.email_type_id= c.email_type_id
-        this.owner_id= c.owner_id
-        this.country_id= c.country_id
-        this.country= this.cById(c.country_id)
-        this.owner= this.oById(c.owner_id)
-        this.email_type = this.eById(c.email_type_id)
-    }
-
-    makeChange = async result => {
-        if(result)
-            this.assingNewValues((await apiManager.getClient(this.id))[0])
-        return result
+    assingNewValues = (user) => {
+        if(!user) return 
+        this.first= user.first,
+        this.last= user.last,
+        this.mobile= user.mobile,
+        this.country= user.country,
+        this.city= user.city,
+        this.email= user.email,
+        this.password= user.password,
+        this.birthday= user.birthday,
+        this.date= user.date,
+        this.image= user.image,
+        this.gender= user.gender,
+        this.active= user.active,
+        this.friends= user.friends,
+        this.events= user.events
     }
 
 
-    cl_updateClient = async (first,last,country) => this.makeChange(await apiManager.cl_updateClient({id: this.id,first,last,country}))
-    ac_transfer = async emailTypeId => this.makeChange(await apiManager.ac_transfer({id: this.id, emailTypeId}))
-    ac_declareSale = async () => this.makeChange(await apiManager.ac_declareSale({id: this.id}))
-    ac_changeOwner = async ownerId => this.makeChange(await apiManager.ac_changeOwner({id: this.id,ownerId}))
+    sign_in = async user => {
+        //TBD api sign in call
+        const user = await null
+        this.assingNewValues(user)
+    }
+    sign_out = () => {
+ 
+    }
+    sign_up = async data => {
+
+    }
+    create_event = async event => {
+
+    }
+    get_events = async () => {
+
+    }
+    get_user_by_id = async id => {
+        //TBD api call
+        const user = await null
+        this.assingNewValues(user)
+    }
+    
 }
 
 
