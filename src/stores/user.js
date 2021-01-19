@@ -11,6 +11,7 @@ export class Client {
         
         this.assingNewValues(c)
 
+        //testtttt
 
         makeAutoObservable(this,{
             last: observable,
