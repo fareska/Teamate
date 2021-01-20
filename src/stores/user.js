@@ -48,8 +48,7 @@ export class Client {
             this.events.splice(0,0,event)
     }
     get_events = async () => {
-        //TBD api get events
-        const events = await null
+        const events = await apiManager.getEvents()
         this.events = events
     }
     get_user_by_id = async id => {
