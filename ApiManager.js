@@ -6,7 +6,7 @@ const sPath = "https://teamate.herokuapp.com"
 const apiManager = {
     signIn: data => pHandler(axios.post(`${sPath}/user/emailPass`,data)),
     singUp: data => pHandler(axios.post(`${sPath}/user/user`,data)),
-    getUserById: id => pHandler(axios.get(`${sPath}/user/user/${id}`,data)),
+    getUserById: id => pHandler(axios.get(`${sPath}/user/user/${id}`)),
 }
 
 module.exports = apiManager
