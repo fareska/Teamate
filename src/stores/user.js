@@ -49,6 +49,17 @@ export class Client {
     }
     get_events = async () => {
         const events = await apiManager.getEvents()
+
+        const sportsObj = {}
+        this.user.sports.forEach(s => sportsObj[s] = true)
+        if(events)
+            events.sort((e1,e2) => {
+                if(sportsObj[e1.sport] && !sportsObj[e2.sport])
+                    return 1
+                else if(sportsObj[e2.sport] && !sportsObj[e1.sport])
+                    return -1
+                return 0
+            })
         this.events = events
     }
     get_user_by_id = async id => {
