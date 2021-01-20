@@ -24,4 +24,4 @@ class NavigationStore {
         }
     }
 }
-export default NavigationStore
+ export default NavigationStore
