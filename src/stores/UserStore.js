@@ -3,7 +3,7 @@ import { observable, action, makeAutoObservable } from 'mobx'
 import AsyncStorage from '@react-native-community/async-storage'
 import apiManager from '../../ApiManager'
 
-export class Client {
+ class UserStore {
     constructor () {
         this.user = {}
         this.friends = []
@@ -35,18 +35,25 @@ export class Client {
     sign_in = async data => {
         const user = await apiManager.signIn(data)
         this.assingNewValues(user)
+       
+        return user.id? true : false // should return true if success
     }
-    sign_out = () => AsyncStorage.setitems('id',null)
+    sign_out = () => {
+     
+        AsyncStorage.setitems('id',null)
+}
     sign_up = async data => {
         const user = await apiManager.signUp(data)
         this.assingNewValues(user)
+        return true
     }
-    create_event = async event => {
+    create_event = async newEvent => {
         //TBD api create event
         const event = await null
         if(event)
             this.events.splice(0,0,event)
     }
+    
     get_events = async () => {
         const events = await apiManager.getEvents()
 
@@ -62,9 +69,11 @@ export class Client {
             })
         this.events = events
     }
+
     get_user_by_id = async id => {
         const user = await apiManager.getUserById(id)
         this.assingNewValues(user)
     }
     
 }
+export default UserStore
