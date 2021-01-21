@@ -35,7 +35,8 @@ import apiManager from '../../ApiManager'
     sign_in = async data => {
         const user = await apiManager.signIn(data)
         this.assingNewValues(user)
-        return true // should return true if success
+       
+        return user.id? true : false // should return true if success
     }
     sign_out = () => {
      
@@ -52,6 +53,7 @@ import apiManager from '../../ApiManager'
         if(event)
             this.events.splice(0,0,event)
     }
+    
     get_events = async () => {
         const events = await apiManager.getEvents()
 
@@ -67,6 +69,7 @@ import apiManager from '../../ApiManager'
             })
         this.events = events
     }
+
     get_user_by_id = async id => {
         const user = await apiManager.getUserById(id)
         this.assingNewValues(user)
