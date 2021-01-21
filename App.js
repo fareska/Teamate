@@ -15,7 +15,7 @@ import UserStore from './src/stores/UserStore'
 import InputsStore from './src/stores/InputsStore';
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const styles = mobileStyles
-const navigator = new NavigationStore('signIn')
+const navigator = new NavigationStore('signIn') 
 const user = new UserStore()
 const inputsStore = new InputsStore()
 
