@@ -1,6 +1,7 @@
 
 import { observable, action, makeAutoObservable } from 'mobx'
 import AsyncStorage from '@react-native-community/async-storage'
+import apiManager from '../../ApiManager'
 
  class UserStore {
     constructor () {
@@ -29,9 +30,10 @@ import AsyncStorage from '@react-native-community/async-storage'
         this.friends= user.friends
         this.events= user.events
     }
-    sign_in = async credentials => {
-        //TBD api sign in call
-        const user = await null
+
+
+    sign_in = async data => {
+        const user = await apiManager.signIn(data)
         this.assingNewValues(user)
         return true // should return true if success
     }
@@ -40,9 +42,7 @@ import AsyncStorage from '@react-native-community/async-storage'
         AsyncStorage.setitems('id',null)
 }
     sign_up = async data => {
-        //TBD api sign up
-        console.log(data)
-        const user = await null
+        const user = await apiManager.signUp(data)
         this.assingNewValues(user)
         return true
     }
@@ -53,13 +53,22 @@ import AsyncStorage from '@react-native-community/async-storage'
             this.events.splice(0,0,event)
     }
     get_events = async () => {
-        //TBD api get events
-        const events = await null
+        const events = await apiManager.getEvents()
+
+        const sportsObj = {}
+        this.user.sports.forEach(s => sportsObj[s] = true)
+        if(events)
+            events.sort((e1,e2) => {
+                if(sportsObj[e1.sport] && !sportsObj[e2.sport])
+                    return 1
+                else if(sportsObj[e2.sport] && !sportsObj[e1.sport])
+                    return -1
+                return 0
+            })
         this.events = events
     }
     get_user_by_id = async id => {
-        //TBD api call
-        const user = await null
+        const user = await apiManager.getUserById(id)
         this.assingNewValues(user)
     }
     
