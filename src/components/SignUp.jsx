@@ -14,26 +14,26 @@ import SelectableButton from './subComponent/SelectableButton'
 
 const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
-            Alert.alert(msg)
+    Alert.alert(msg)
 }
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const styles = mobileStyles
-export const SignUp = inject('navigator','user','inputsStore')(observer(({navigator,inputsStore,user}) => {
-    const {sports, countries, signUpInputs, handleTextInput}= inputsStore
-    const { first,last,email,city,country,birthdate,mobile,gender, password, confirmPassword} = signUpInputs
+export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user }) => {
+    const { sports, countries, signUpInputs, handleTextInput } = inputsStore
+    const { first, last, email, city, country, birthdate, mobile, gender, password, confirmPassword } = signUpInputs
 
-    const submit = async function(){
-       
-        
+    const submit = async function () {
+
+
         switch (false) {
-            case first!=='':
+            case first !== '':
                 console.log(first);
                 alertMessage('Please enter your first name')
                 return
-            case last!=='':
+            case last !== '':
                 alertMessage('Please enter your last name')
                 return
-            case email!=='':
+            case email !== '':
                 alertMessage('Please enter your email')
                 return
             case email.includes('@'):
@@ -42,36 +42,36 @@ export const SignUp = inject('navigator','user','inputsStore')(observer(({naviga
             case email.split('@')[1].includes('.'):
                 alertMessage('Please enter a valid email')
                 return
-            case country!=='':
+            case country !== '':
                 alertMessage('Please select a country')
                 return
-            case mobile!=='':
+            case mobile !== '':
                 alertMessage('Please enter your mobile number')
                 return
-            case gender!==0:
+            case gender !== 0:
                 alertMessage('Please select your gender')
                 return
-            case password!=='':
+            case password !== '':
                 alertMessage('Please enter a password')
                 return
             case password.length > 7:
                 alertMessage('Password must have at least 8 characters')
                 return
-            case confirmPassword!=='':
+            case confirmPassword !== '':
                 alertMessage('Enter your password again for confirmation')
                 return
             case confirmPassword === password:
                 alertMessage('Passwords do not match, please enter a password again!')
                 return
-            }
-            const data = {...signUpInputs}
-            data.date = Date.now()
-          const res = await user.sign_up(data)
-          if(res){
-              alertMessage('Successful! please sign in with your email and password')
-              inputsStore.emptySignUpForm()
-              navigator.redirect('signIn')
-          }
+        }
+        const data = { ...signUpInputs }
+        data.date = Date.now()
+        const res = await user.sign_up(data)
+        if (res) {
+            alertMessage('Successful! please sign in with your email and password')
+            inputsStore.emptySignUpForm()
+            navigator.redirect('signIn')
+        }
     }
     return (
         <SwipableScrollView
@@ -90,28 +90,28 @@ export const SignUp = inject('navigator','user','inputsStore')(observer(({naviga
                 <View style={styles.signInInputsContainer}>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>First name</Text>
-                        <TextInput textAlign='center' 
-                        value={first} onChangeText={(value)=> handleTextInput('signUpInputs','first',value)}
-                        textContentType="name" style={styles.input} />
+                        <TextInput textAlign='center'
+                            value={first} onChangeText={(value) => handleTextInput('signUpInputs', 'first', value)}
+                            textContentType="name" style={styles.input} />
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Last Name</Text>
-                        <TextInput textAlign='center' 
-                        value={last} onChangeText={(value)=> handleTextInput('signUpInputs','last',value)}
-                        textContentType="familyName" style={styles.input} />
+                        <TextInput textAlign='center'
+                            value={last} onChangeText={(value) => handleTextInput('signUpInputs', 'last', value)}
+                            textContentType="familyName" style={styles.input} />
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Mobile Number</Text>
-                        <TextInput textAlign='center' 
-                        value={mobile} onChangeText={(value)=> handleTextInput('signUpInputs','mobile',value)}
-                        textContentType="telephoneNumber" style={styles.input} />
+                        <TextInput textAlign='center'
+                            value={mobile} onChangeText={(value) => handleTextInput('signUpInputs', 'mobile', value)}
+                            textContentType="telephoneNumber" style={styles.input} />
                     </View>
-               
+
                     <View style={styles.pickerContainer}>
                         <Text style={styles.label}>Gender</Text>
                         <Picker style={styles.picker}
                             selectedValue={gender}
-                            onValueChange={(value)=> handleTextInput('signUpInputs','gender',value)}
+                            onValueChange={(value) => handleTextInput('signUpInputs', 'gender', value)}
                             mode="dialog"
                             enabled={true}>
                             <Picker.Item label="Select Gender" value={0} />
@@ -120,11 +120,12 @@ export const SignUp = inject('navigator','user','inputsStore')(observer(({naviga
                         </Picker>
 
                     </View>
+                  
                     <View style={styles.pickerContainer}>
                         <Text style={styles.label}>Country</Text>
                         <Picker style={styles.picker}
-                             selectedValue={country}
-                             onValueChange={(value)=> handleTextInput('signUpInputs','country',value)}
+                            selectedValue={country}
+                            onValueChange={(value) => handleTextInput('signUpInputs', 'country', value)}
                             mode="dialog"
                             enabled={true}>
                             {countries.map(c => <Picker.Item label={c.country} value={c.country} key={c.id} />)}
@@ -135,22 +136,22 @@ export const SignUp = inject('navigator','user','inputsStore')(observer(({naviga
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Email</Text>
-                        <TextInput textAlign='center' 
-                        value={email} onChangeText={(value)=> handleTextInput('signUpInputs','email',value)}
-                        textContentType="username" style={styles.input}
-                         />
+                        <TextInput textAlign='center'
+                            value={email} onChangeText={(value) => handleTextInput('signUpInputs', 'email', value)}
+                            textContentType="username" style={styles.input}
+                        />
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Password</Text>
-                        <TextInput textAlign='center' 
-                        value={password} onChangeText={(value)=> handleTextInput('signUpInputs','password',value)}
-                        textContentType="password" style={styles.input} secureTextEntry={true} />
+                        <TextInput textAlign='center'
+                            value={password} onChangeText={(value) => handleTextInput('signUpInputs', 'password', value)}
+                            textContentType="password" style={styles.input} secureTextEntry={true} />
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Confirm password</Text>
-                        <TextInput textAlign='center' 
-                        value={confirmPassword} onChangeText={(value)=> handleTextInput('signUpInputs','confirmPassword',value)}
-                        textContentType="password" style={styles.input} secureTextEntry={true} />
+                        <TextInput textAlign='center'
+                            value={confirmPassword} onChangeText={(value) => handleTextInput('signUpInputs', 'confirmPassword', value)}
+                            textContentType="password" style={styles.input} secureTextEntry={true} />
                     </View>
                     <Text style={styles.label}>Sports of your interest</Text>
                     <View style={styles.sportsContainer}>
