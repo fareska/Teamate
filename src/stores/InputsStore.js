@@ -7,19 +7,19 @@ class InputsStore {
             password: ''
         }
         this.signUpInputs = {
-            first: '',
-            last: "",
-            email: "",
-            city: "",
-            country: "",
-            birthdate: '',
-            mobile: "",
+            first: 'rami',
+            last: "naser",
+            email: "rami@naser.com",
+            city: "Jerusalem",
+            country: "Israel",
+            birthdate: 652917600000,
+            mobile: "02323",
             image: null,
-            gender: 0,
+            gender: 1,
             date: 0,
-            password: '',
-            confirmPassword: '',
-            sports: []
+            password: 'qweqweqwe',
+            confirmPassword: 'qweqweqwe',
+            sports: ["basketball"]
         }
         this.countries = countries
         this.sports = sports

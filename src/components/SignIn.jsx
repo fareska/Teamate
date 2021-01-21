@@ -16,13 +16,14 @@ const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator,
     const { email, password } = signInInputs
     const submit = async ()=> {
         const res = await user.sign_in(signInInputs)
-        if(res){
+       
+        if(res.status){
             navigator.redirect('feeds')
             inputsStore.emptySignInForm()
         }else{
-            Platform.OS === 'web' && alert('Entered Email or Password might be wrong')
-            Alert.alert('Entered Email or Password might be wrong')
-            inputsStore.emptySignInPassword()
+            Platform.OS === 'web' && alert(res.res)
+            Alert.alert(res.res)
+            inputsStore.emptySignPassword()
         }
     }
     return (

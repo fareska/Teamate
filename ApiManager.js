@@ -1,14 +1,15 @@
 const axios = require('axios')
 
-const pHandler = promise => promise.then(data => data.data).catch(error => null)
-const sPath = "https://teamate.herokuapp.com"
+class ApiManager {
+    constructor() {
+        this.pHandler = promise => promise.then(data => data.data).catch(error => null)
+        this.sPath = "https://teamate.herokuapp.com"
+    }
 
-const apiManager = {
-    signIn: data => pHandler(axios.post(`${sPath}/user/emailPass`,data)),
-    singUp: data => pHandler(axios.post(`${sPath}/user/user`,data)),
-    getUserById: id => pHandler(axios.get(`${sPath}/user/user/${id}`)),
-
-    getEvents: () => pHandler(axios.get(`${sPath}/posts`)),
+    signIn = async data => this.pHandler(axios.post(`${this.sPath}/user/user/emailPass`, data))
+    signUp = async data => this.pHandler(axios.post(`${this.sPath}/user/user`, data))
+    getUserById = async id => this.pHandler(axios.get(`${this.sPath}/user/user/${id}`))
+    getEvents = async () => this.pHandler(axios.get(`${this.sPath}/posts`))
 }
 
-module.exports = apiManager
+export default ApiManager
