@@ -1,6 +1,6 @@
 import { Platform, StyleSheet, Dimensions,StatusBar } from 'react-native'
 import { colors } from '../COLORS'
-const { primary, secondary } = colors
+const { primary, secondary,grey } = colors
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
           paddingTop: windowHeight * 0.55,
           marginBottom: 200,
             alignItems:'center',
-            backgroundColor: '#f8f9fa'
+            backgroundColor: grey
         },
         footer:{
             width:'100%',

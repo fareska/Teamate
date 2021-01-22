@@ -26,7 +26,7 @@ class ApiManager {
         try {
             const res = await axios.post(`${this.sPath}/user/user`, data)
             console.log(res);
-            return  res
+            return res
 
         } catch (error) {
             console.log(error)
@@ -46,6 +46,62 @@ class ApiManager {
     
     }
     getEvents = async () => await this.pHandler(axios.get(`${this.sPath}/posts`))
+    getEventById = async id => await this.pHandler(axios.get(`${this.sPath}/posts/${id}`))
+    getCountries = async () => await this.pHandler(axios.get(`${this.sPath}/user/user/all/column/country`))
+    getSports = async () => await this.pHandler(axios.get(`${this.sPath}/user/user/all/column/sport`))
+    
+    addFriend = async data => { 
+        try {
+            const res = await axios.post(`${this.sPath}/post`, data)
+            return res
+        } catch (err) { return err }
+    }
+
+    addEvent = async data => { 
+        try {
+            const res = await axios.post(`${this.sPath}/post`, data)
+            return res
+        } catch (err) { return err }
+    }
+
+    addComment = async data => {
+        try {
+            const res = await axios.post(`${this.sPath}/post/comment`, data)
+            return res
+        } catch (err) { return err }
+    }
+
+    deleteComment = async id => {
+        try {
+            const res = await axios.delete(`${this.sPath}/post/comment/${id}`)
+            return res
+        } catch (err) { return err }
+    }
+
+    addParti = async data => {
+        try {
+            const res = await axios.post(`${this.sPath}/post/participant`, data)
+            return res
+        } catch (err) { return err }
+    }
+    
+    deactivateEvent = async id =>{
+        try {
+            const res = await axios.put(`${this.sPath}/post/deactivate/${id}`)
+            return res
+        } catch (err) { return err }
+        
+    }
+
+    deleteEvent = async id =>{
+        try {
+            const res = await axios.delete(`${this.sPath}/post/${id}`)
+            return res
+        } catch (err) { return err }
+    }
+
+
+
 }
 
 export default ApiManager

@@ -33,7 +33,7 @@ export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user
             </View>
         </SwipableScrollView>
     )
-}))
+})) 
 
 const dummyFeeds = [
     {

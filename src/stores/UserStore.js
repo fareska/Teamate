@@ -82,7 +82,6 @@ class UserStore {
     }
 
     get_events = async () => {
-        console.log('requesting events');
         const events = await apiManager.getEvents()
         const sportsObj = {}
         this.user.sports.forEach(s => sportsObj[s] = true)
