@@ -7,6 +7,7 @@ import AppHeader  from './subComponent/AppHeader';
 import EventFeed from './subComponent/EventFeed';
 import { styles as webStyles } from '../styles/web/Feeds'
 import { styles as mobileStyles } from '../styles/mobile/Feeds'
+import { FloatingAction } from "react-native-floating-action";
 const styles = mobileStyles
 
 
@@ -27,9 +28,10 @@ export const Feeds = inject('navigator','user','inputsStore')(observer(({user}) 
 
         <Text> feeds </Text>
         </View>
+        <FloatingAction/>
        </SwipableScrollView>
     )
-}))
+})) 
 
 const dummyFeeds = [
     {
