@@ -11,15 +11,15 @@ const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user }) => {
     const { signInInputs, handleTextInput } = inputsStore
     const { email, password } = signInInputs
-    const submit = async ()=> {
-        console.log(signInInputs);
+
+    const submit = async () => {
         const res = await user.sign_in(signInInputs)
-       
-        if(res.status){
+
+        if (res.status) {
             navigator.redirect('feeds')
             user.get_events()
             inputsStore.emptySignInForm()
-        }else{
+        } else {
             Platform.OS === 'web' && alert(res.res)
             Alert.alert(res.res)
             inputsStore.emptySignPassword()
@@ -69,7 +69,7 @@ const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator,
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigator.redirect('signUp')} style={styles.signUpBtn}>
-                    
+
                     <Text style={styles.sinUpBtnText} >Sign up</Text>
                 </TouchableOpacity>
             </View>

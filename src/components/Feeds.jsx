@@ -3,10 +3,11 @@ import { Text, View, Platform, TextInput, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { inject, observer } from 'mobx-react';
 import SwipableScrollView from './subComponent/SwipableScrollView';
-import AppHeader  from './subComponent/AppHeader';
+import AppHeader from './subComponent/AppHeader';
 import EventFeed from './subComponent/EventFeed';
 import { styles as webStyles } from '../styles/web/Feeds'
 import { styles as mobileStyles } from '../styles/mobile/Feeds'
+import { FloatingAction } from "react-native-floating-action";
 const styles = mobileStyles
 
 
@@ -15,19 +16,22 @@ const styles = mobileStyles
 
 
 
-export const Feeds = inject('navigator','user','inputsStore')(observer(({user}) => {
-    return (
-       <SwipableScrollView 
-       style={styles.feedsScrollable}
-       contentContainerStyle={styles.feedsScrollableContainer} >
-           <AppHeader/>
-  
-        {user.events.map((f,i) => f.active && <EventFeed key={i} eventFeed={f} style={styles}/>)}
-        <View style={styles.footer}>
+export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user, navigator }) => {
 
-        <Text> feeds </Text>
-        </View>
-       </SwipableScrollView>
+    return (
+        <SwipableScrollView
+            style={styles.feedsScrollable}
+            contentContainerStyle={styles.feedsScrollableContainer} >
+            <AppHeader />
+ 
+            {user.events.map((f, i) => f.active && <EventFeed key={i} eventFeed={f} style={styles} />)}
+            <View style={styles.footer}>
+                <Text> feeds </Text>
+            </View>
+            <View style={styles.floatingContainer}>
+                <FloatingAction />
+            </View>
+        </SwipableScrollView>
     )
 }))
 
@@ -55,7 +59,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -78,7 +82,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -101,7 +105,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -124,7 +128,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -147,7 +151,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -170,7 +174,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -193,7 +197,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -216,7 +220,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -239,7 +243,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -262,7 +266,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -285,7 +289,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -308,7 +312,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -331,7 +335,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -354,7 +358,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",
@@ -377,7 +381,7 @@ const dummyFeeds = [
         "description": "waka WAKA",
         "date": 1611001784558,
         "active": 1
-    },{
+    }, {
         "country": "Israel",
         "city": "Taybe",
         "frequency": "weekly",

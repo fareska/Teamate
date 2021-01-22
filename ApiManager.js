@@ -33,7 +33,18 @@ class ApiManager {
             return error
         }
     }
-    getUserById = async id => await this.pHandler(axios.get(`${this.sPath}/user/user/${id}`))
+    getUserById = async id =>{
+        console.log(id);
+        try {
+        const data = await axios.get(`${this.sPath}/user/user/${id}`)
+        console.log(data.data);
+        return data.data 
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    
+    }
     getEvents = async () => await this.pHandler(axios.get(`${this.sPath}/posts`))
 }
 

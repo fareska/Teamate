@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
 
 
         },
+        floatingContainer:{
+          position:'absolute',
+          width:'100%',
+          height: windowHeight * 1.2
+        },
 
 
 });

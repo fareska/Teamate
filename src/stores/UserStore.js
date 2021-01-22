@@ -102,10 +102,8 @@ class UserStore {
 
     get_user_by_id = async id => {
         const user = await apiManager.getUserById(id)
-        console.log(user);
-        console.log(id,'iddddd **************');
         if (user !== null) {
-            if (user.user.first) {
+            if (user.user) {
                 runInAction(()=>{
                     this.assignNewValues(user)
                     this.user.id = id
