@@ -21,7 +21,8 @@ class UserStore {
             sign_up: action,
             create_event: action,
             get_events: action,
-            get_user_by_id: action
+            get_user_by_id: action,
+            askToJoin:action
         })
     }
 
@@ -29,7 +30,18 @@ class UserStore {
         this.user = user.user
         this.friends = user.friends
         this.match = user.match
-        this.user.sports=user.sport
+        this.user.sports = user.sport
+    }
+    askToJoin = async (userId, postId) => {
+        console.log(userId,postId);
+        try {
+            const res = await apiManager.addParti({ userId, postId })
+           await this.get_events()
+           console.log(res);
+           return res
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 
@@ -41,12 +53,12 @@ class UserStore {
         } catch (error) {
             console.log(error);
             return error
-        } 
+        }
         if (user !== null) {
             if (user.user) {
                 this.assignNewValues(user)
-                await this.get_events()  
-                AsyncStorage.setItem('userId',`${user.user.id}` )
+                await this.get_events()
+                AsyncStorage.setItem('userId', `${user.user.id}`)
                 return { status: true }
             } else {
                 return { status: false, res: user }
@@ -58,14 +70,14 @@ class UserStore {
     }
     sign_out = () => {
         AsyncStorage.setItem('userId', 'null')
-        this.user={}
+        this.user = {}
         this.user = {}
         this.friends = []
         this.match = []
         this.events = []
     }
     sign_up = async data => {
-        data.date=Date.now()
+        data.date = Date.now()
         data.birthDate = data.birthdate
         delete data.birthdate
         const signUpRes = await apiManager.signUp(data)
@@ -76,9 +88,10 @@ class UserStore {
     }
     create_event = async newEvent => {
         //TBD api create event
-        const event = await null
-        if (event)
-            this.events.splice(0, 0, event)
+        console.log(newEvent);
+        const event = await apiManager.addEvent(newEvent)
+        console.log(event);
+        this.get_events()
     }
 
     get_events = async () => {
@@ -103,7 +116,7 @@ class UserStore {
         const user = await apiManager.getUserById(id)
         if (user !== null) {
             if (user.user) {
-                runInAction(()=>{
+                runInAction(() => {
                     this.assignNewValues(user)
                     this.user.id = id
                 })
@@ -116,6 +129,7 @@ class UserStore {
             return { status: false }
         }
     }
+
 
 }
 export default UserStore

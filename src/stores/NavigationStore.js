@@ -3,16 +3,17 @@ const { makeObservable, observable, action, computed } = require("mobx")
 class NavigationStore {
     constructor(page) {
         this.history = [page]
-        this.floatingAction=true 
+        this.EventMenu = false
         makeObservable(this,{
-            history:observable,
-            floatingAction:observable, 
+            history:observable, 
+            EventMenu:observable, 
             redirect: action,
             previous:action,
-            showFloating:action,
-            hideFloating:action,
-            currentPage:computed
-        })
+            showEventMenu:action,
+            hideEventMenu:action,
+            currentPage:computed,
+
+        }) 
     }
     get currentPage(){ 
         const i = this.history.length - 1
@@ -27,11 +28,12 @@ class NavigationStore {
             this.history.splice(i,1)
         }
     }
-    showFloating= ()=>{
-        this.floatingAction = true
+    showEventMenu= ()=>{
+        this.EventMenu = true
     }
-    hideFloating= ()=>{
-        this.floatingAction = false
+    hideEventMenu= ()=>{
+        this.EventMenu = false
     }
+  
 }
  export default NavigationStore

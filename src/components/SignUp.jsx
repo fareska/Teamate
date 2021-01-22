@@ -23,45 +23,8 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
     const { first, last, email, city, country, birthdate, mobile, gender, password, confirmPassword } = signUpInputs
 
     const submit = async function () {
-
-
-        switch (false) {
-            case first !== '':
-                alertMessage('Please enter your first name')
-                return
-            case last !== '':
-                alertMessage('Please enter your last name')
-                return
-            case email !== '':
-                alertMessage('Please enter your email')
-                return
-            case email.includes('@'):
-                alertMessage('Please enter a valid email')
-                return
-            case email.split('@')[1].includes('.'):
-                alertMessage('Please enter a valid email')
-                return
-            case country !== '':
-                alertMessage('Please select a country')
-                return
-            case mobile !== '':
-                alertMessage('Please enter your mobile number')
-                return
-            case gender !== 0:
-                alertMessage('Please select your gender')
-                return
-            case password !== '':
-                alertMessage('Please enter a password')
-                return
-            case password.length > 7:
-                alertMessage('Password must have at least 8 characters')
-                return
-            case confirmPassword !== '':
-                alertMessage('Enter your password again for confirmation')
-                return
-            case confirmPassword === password:
-                alertMessage('Passwords do not match, please enter a password again!')
-                return
+        if (validateInputs(signUpInputs)) {
+            return
         }
         const data = { ...signUpInputs }
         const res = await user.sign_up(data)
@@ -118,7 +81,7 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                         </Picker>
 
                     </View>
-                  
+
                     <View style={styles.pickerContainer}>
                         <Text style={styles.label}>Country</Text>
                         <Picker style={styles.picker}
@@ -178,6 +141,49 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
 
     )
 }))
+
+const validateInputs = (inputs) => {
+    const { first, last, email, city, country, birthdate, mobile, gender, password, confirmPassword } = inputs
+    switch (false) {
+        case first !== '':
+            alertMessage('Please enter your first name')
+            return true
+        case last !== '':
+            alertMessage('Please enter your last name')
+            return true
+        case email !== '':
+            alertMessage('Please enter your email')
+            return true
+        case email.includes('@'):
+            alertMessage('Please enter a valid email')
+            return true
+        case email.split('@')[1].includes('.'):
+            alertMessage('Please enter a valid email')
+            return true
+        case country !== '':
+            alertMessage('Please select a country')
+            return true
+        case mobile !== '':
+            alertMessage('Please enter your mobile number')
+            return true
+        case gender !== 0:
+            alertMessage('Please select your gender')
+            return true
+        case password !== '':
+            alertMessage('Please enter a password')
+            return true
+        case password.length > 7:
+            alertMessage('Password must have at least 8 characters')
+            return true
+        case confirmPassword !== '':
+            alertMessage('Enter your password again for confirmation')
+            return true
+        case confirmPassword === password:
+            alertMessage('Passwords do not match, please enter a password again!')
+            return true
+    }
+    return false
+}
 
 // const sports = [
 //     { id: 1, selected: true, sport: 'Football' },

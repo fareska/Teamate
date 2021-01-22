@@ -21,20 +21,34 @@ class InputsStore {
             confirmPassword: 'qweqweqwe',
             sports: ["basketball"]
         }
+        this.newEventForm = {
+            sport: '',
+            frequency: '',
+            date: 0,
+            time: 0,
+            people_num: 0,
+            city: '',
+            country: '',
+            description: '',
+            lon: 0,
+            lat: 0,
+            address: ''
+        }
         this.countries = countries
         this.sports = sports
 
         makeObservable(this, {
             signInInputs: observable,
             signUpInputs: observable,
+            newEventForm: observable,
             sports: observable,
             countries: observable,
             handleTextInput: action,
             emptySignUpForm: action,
             emptySignInForm: action,
             emptySignPassword: action,
-            handleSelectableInput:action
-            
+            handleSelectableInput: action
+
 
         })
     }
@@ -58,7 +72,7 @@ class InputsStore {
             confirmPassword: '',
             sports: []
         }
-        this.sports.forEach(s=>s.selected = false)
+        this.sports.forEach(s => s.selected = false)
     }
     emptySignInForm = () => {
         this.signInInputs = {
@@ -71,11 +85,11 @@ class InputsStore {
     }
     handleSelectableInput = (id) => {
         const sport = this.sports.find(s => id === s.id)
-        sport.selected= !sport.selected
-        const sports = this.sports.filter(s =>s.selected).map(s=>s.sport)
-        this.signUpInputs.sports=sports
+        sport.selected = !sport.selected
+        const sports = this.sports.filter(s => s.selected).map(s => s.sport)
+        this.signUpInputs.sports = sports
     }
-    
+
 
 }
 
@@ -83,6 +97,7 @@ class InputsStore {
 export default InputsStore
 
 const sports = [
+    { id: 0, selected: false, sport: '' },
     { id: 1, selected: false, sport: 'Football' },
     { id: 2, selected: false, sport: 'Boxing' },
     { id: 3, selected: false, sport: 'Surfing' },
@@ -100,6 +115,7 @@ const sports = [
 ]
 
 const countries = [
+    { id: 0, country: '' },
     { id: 8497, country: 'Andorra' },
     { id: 8498, country: 'United Arab Emirates' },
     { id: 8499, country: 'Afghanistan' },
