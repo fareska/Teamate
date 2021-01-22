@@ -1,21 +1,24 @@
 import { inject, observer } from 'mobx-react'
 import React from 'react'
-import { View } from 'react-native'
 import { Feeds } from './Feeds';
 import SignIn from './SignIn';
 import { SignUp } from './SignUp';
 import Welcome from './welcome';
 
-const Navigation = inject('navigator')(observer(({ navigator }) => {
+const Navigation = inject('navigator', 'user')(observer(({ navigator, user }) => {
+    const isSignedIn = () => {
+        return user.user.id ? true : false
+    }
+    console.log(isSignedIn());
     switch (navigator.currentPage) {
         case "welcome":
-            return <Welcome />
+            return isSignedIn() ? navigator.redirect('feeds') : <Welcome />
         case "signIn":
-            return <SignIn />
+            return isSignedIn() ? navigator.redirect('feeds') : <SignIn />
         case "signUp":
-            return <SignUp />
+            return isSignedIn() ? navigator.redirect('feeds') : <SignUp />
         case 'feeds':
-            return <Feeds />
+            return isSignedIn() ? <Feeds /> : navigator.redirect('signIn')
     }
 
 

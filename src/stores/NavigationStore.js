@@ -14,10 +14,10 @@ class NavigationStore {
         const i = this.history.length - 1
         return this.history[this.history.length-1]
     }
-    redirect(page) {
+    redirect= (page) => {
         this.history.push(page)
     }
-    previous(){
+    previous= ()=>{
         if(this.history.length>2){
             const i = this.history.length - 1
             this.history.splice(i,1)

@@ -3,7 +3,7 @@ import React from 'react'
 import {
     Text, View, Platform,
     Keyboard, TextInput,
-    TouchableOpacity, ScrollView, Alert
+    TouchableOpacity, ScrollView, Alert,
 } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { styles as webStyles } from '../styles/web/SignUp'
@@ -27,7 +27,6 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
 
         switch (false) {
             case first !== '':
-                console.log(first);
                 alertMessage('Please enter your first name')
                 return
             case last !== '':
@@ -65,7 +64,6 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                 return
         }
         const data = { ...signUpInputs }
-        data.date = Date.now()
         const res = await user.sign_up(data)
         if (res) {
             alertMessage('Successful! please sign in with your email and password')
