@@ -9,6 +9,9 @@ import Navigation from './src/components/Navigation';
 import UserStore from './src/stores/UserStore'
 import InputsStore from './src/stores/InputsStore';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Feeds } from './src/components/Feeds';
+import { FloatingAction } from "react-native-floating-action";
+
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const styles = mobileStyles
 const navigator = new NavigationStore('welcome')
@@ -17,7 +20,7 @@ const inputsStore = new InputsStore()
  
 const isUserSaved = async () => {
   AsyncStorage.getItem('userId').then(async (userId) => {
-    if (userId !== "null" && userId !== null) {
+    if (userId !== "null" && userId) { 
       const res = await user.get_user_by_id(userId)
     } else {
       setTimeout(
@@ -37,8 +40,10 @@ export default function App() {
         <SafeAreaView style={styles.container} >
 
           <Navigation />
+          {/* <Feeds/>  */}
 
-        </SafeAreaView>
+
+        </SafeAreaView> 
       </View>
     </Provider>
   );

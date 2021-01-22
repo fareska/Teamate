@@ -108,14 +108,17 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     signUpBtn:{
-       
+       width:'40%',
+       height:30,
        alignSelf: 'flex-end',
-       marginRight: '10%'
+       alignItems:'flex-end',
+       marginRight: '10%',
+    
 
     },
     sinUpBtnText:{
         color: primary,
-        fontSize:15,
+        fontSize:20,
         fontWeight: '600',
     },
     

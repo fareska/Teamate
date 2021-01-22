@@ -1,33 +1,18 @@
-import { Platform, StyleSheet } from 'react-native'
+import { Platform, StyleSheet,Dimensions } from 'react-native'
 import { colors } from '../COLORS'
-const { primary, secondary } = colors
+const { primary, secondary,grey } = colors
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
-    logoContainer: {
-        marginTop: 40,
-        marginBottom: 40,
-        width: "100%",
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-    },
-    circle: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+    EventMenu:{
+        width:'100%',
         backgroundColor: primary,
+        zIndex:999
     },
-    logo: {
-        fontSize: 40,
-        textAlign: 'center',
-        fontWeight: '900'
-    },
-    signUp: {
-        flex: 1,
-        width: "90%",
+    evenMenuContainer:{
+        backgroundColor:grey,
         alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: '5%',
-        paddingRight: '5%',
     },
     titleContainer: {
         width: "100%",
@@ -46,8 +31,9 @@ const styles = StyleSheet.create({
         color: 'grey',
     },
 
-    signInInputsContainer: {
+    eventInputsContainer: {
         width: "100%",
+        padding:20,
         alignItems: 'flex-start',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
@@ -64,7 +50,7 @@ const styles = StyleSheet.create({
     },
     pickerContainer: {
         width: '100%',
-        height: Platform.OS === 'ios' ? 200 : 100,
+        height: Platform.OS === 'ios' ? 250 : 100,
         marginTop: 30,
         zIndex: 10
     },
@@ -77,50 +63,14 @@ const styles = StyleSheet.create({
     },
     picker: {
         marginTop: Platform.OS === 'ios' ? 0 : 30,
-        top: Platform.OS === 'ios' ? -10 : 0,
         width: '100%',
         height: 30,
         borderBottomColor: "darkgrey",
         borderStyle: 'solid',
         fontSize: 20,
     },
-    sportsContainer: {
-        marginTop:20,
-        paddingTop:40,
-        display:'flex' ,
-        width: '100%',
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
 
-    },
-    sportTouchableButton: {
-        width: '35%',
-        height: 40,
-        borderRadius: 8,
-        margin: 10,
-    },
-    sportBtn:{
-        color: 'white',
-        width: "100%",
-        height: '100%',
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: secondary,
 
-    },
-    selectedSportBtn:{
-        color: 'white',
-        width: "100%",
-        height: '100%',
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ccff33',
-
-    },
     signInBtnContainer: {
         height: 250,
         width: "100%",
@@ -132,7 +82,7 @@ const styles = StyleSheet.create({
         width: '90%',
         height: 40,
         borderRadius: 8,
-        margin: 50,
+        alignSelf:'center'
 
     },
     signInBtn: {
@@ -163,16 +113,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '600',
     },
-    signUpScrollable: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-
-    },
-    signUpScrollableContainer: {
-        alignItems: 'center'
-    },
-
+    footer:{
+        width:'100%',
+        height:300,
+    }
 
 });
 
