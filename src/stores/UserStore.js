@@ -110,6 +110,7 @@ class UserStore {
                     this.assignNewValues(user)
                     this.user.id = id
                 })
+                await this.get_events()
                 return { status: true }
             } else {
                 return { status: false, res: user }
