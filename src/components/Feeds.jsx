@@ -15,21 +15,21 @@ const styles = mobileStyles
 
 
 
-export const Feeds = () => {
+export const Feeds = inject('navigator','user','inputsStore')(observer(({user}) => {
     return (
        <SwipableScrollView 
        style={styles.feedsScrollable}
        contentContainerStyle={styles.feedsScrollableContainer} >
            <AppHeader/>
   
-        {dummyFeeds.map((f,i) => f.active && <EventFeed key={i} eventFeed={f} style={styles}/>)}
+        {user.events.map((f,i) => f.active && <EventFeed key={i} eventFeed={f} style={styles}/>)}
         <View style={styles.footer}>
 
         <Text> feeds </Text>
         </View>
        </SwipableScrollView>
     )
-}
+}))
 
 const dummyFeeds = [
     {

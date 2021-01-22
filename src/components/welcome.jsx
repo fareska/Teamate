@@ -4,15 +4,16 @@ import { View, Text, Button } from 'react-native'
 
 const Welcome = inject("navigator")(observer(({navigator}) => {
     return (
-        <View style={{
+        <View on style={{
             flex:1,
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-            <Text>
-                welcome to Teamate
+            <Text style={{
+                fontSize: 20,
+            }}>
+                Welcome to TeaMate
             </Text>
-            <Button title="Sign in"onPress={()=>navigator.redirect('signIn')}/>
         </View>
     )
 }))

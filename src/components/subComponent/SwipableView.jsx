@@ -27,6 +27,7 @@ const SwipableView = inject('navigator')(observer(({ navigator, children, style 
     return (
         <View style={style}
             onStartShouldSetResponder={(e) => true}
+            onTouchStart={trackTouch}
             onResponderMove={trackTouch}
             onTouchMove={trackTouch}
             onMomentumScrollEnd={handleReleaseTouch}

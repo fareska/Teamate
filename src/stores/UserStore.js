@@ -4,8 +4,6 @@ import AsyncStorage from '@react-native-community/async-storage'
 import ApiManager from '../../ApiManager'
 const apiManager = new ApiManager()
 
-console.log(apiManager);
-
 class UserStore {
     constructor() {
         this.user = {}
@@ -31,16 +29,24 @@ class UserStore {
         this.user = user.user
         this.friends = user.friends
         this.match = user.match
+        this.user.sports=user.sport
     }
 
 
     sign_in = async data => {
-        const user = await apiManager.signIn(data)
-        console.log(user);
+        let user
+        data.email = data.email.split(' ').join('')
+        try {
+            user = await apiManager.signIn(data)
+        } catch (error) {
+            console.log(error);
+            return error
+        } 
         if (user !== null) {
             if (user.user) {
                 this.assignNewValues(user)
-                AsyncStorage.setItem('userId', user.user.id)
+                await this.get_events()  
+                AsyncStorage.setItem('userId',`${user.user.id}` )
                 return { status: true }
             } else {
                 return { status: false, res: user }
@@ -51,13 +57,21 @@ class UserStore {
         }
     }
     sign_out = () => {
-        AsyncStorage.setitems('userId', null)
+        AsyncStorage.setItem('userId', 'null')
+        this.user={}
+        this.user = {}
+        this.friends = []
+        this.match = []
+        this.events = []
     }
     sign_up = async data => {
+        data.date=Date.now()
+        data.birthDate = data.birthdate
+        delete data.birthdate
         const signUpRes = await apiManager.signUp(data)
+        console.log(signUpRes);
         // const signInRes = await this.sign_in({email: data.email, password: data.password})
         // this.assingNewValues(user)
-        console.log(signUpRes);
         return signUpRes
     }
     create_event = async newEvent => {
@@ -68,6 +82,7 @@ class UserStore {
     }
 
     get_events = async () => {
+        console.log('requesting events');
         const events = await apiManager.getEvents()
         const sportsObj = {}
         this.user.sports.forEach(s => sportsObj[s] = true)
@@ -82,13 +97,19 @@ class UserStore {
         runInAction(() => {
             this.events = events
         })
+        console.log(this.events);
     }
 
     get_user_by_id = async id => {
         const user = await apiManager.getUserById(id)
+        console.log(user);
+        console.log(id,'iddddd **************');
         if (user !== null) {
             if (user.user.first) {
-                this.assignNewValues(user)
+                runInAction(()=>{
+                    this.assignNewValues(user)
+                    this.user.id = id
+                })
                 return { status: true }
             } else {
                 return { status: false, res: user }

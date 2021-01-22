@@ -152,12 +152,15 @@ const styles = StyleSheet.create({
     },
 
     signUpBtn: {
-        alignSelf: 'flex-end',
-        marginRight: '10%'
+        width:'40%',
+       height:30,
+       alignSelf: 'flex-end',
+       alignItems:'flex-end',
+       marginRight: '10%',
     },
     sinUpBtnText: {
         color: primary,
-        fontSize: 15,
+        fontSize: 20,
         fontWeight: '600',
     },
     signUpScrollable: {

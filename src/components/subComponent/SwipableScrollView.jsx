@@ -6,11 +6,12 @@ const SwipableScrollView = inject('navigator')(observer(({navigator,children,sty
     let touchArrX = []
     let touchArrY = []
     const trackTouch = (e) => {
+        
         touchArrX.push(e.nativeEvent.locationX)
         touchArrY.push(e.nativeEvent.locationY)
     }
     const handleReleaseTouch = (e) => {
-        
+        console.log(touchArrX[touchArrX.length - 1] - touchArrX[0]);
         if (touchArrX[touchArrX.length - 1] - touchArrX[0] > 150) {
             navigator.previous()
             touchArrX = []
@@ -29,6 +30,7 @@ const SwipableScrollView = inject('navigator')(observer(({navigator,children,sty
          <ScrollView style={style}
           contentContainerStyle={contentContainerStyle}
             onStartShouldSetResponder={(e) => true}
+            onTouchStart={trackTouch}
             onTouchMove={trackTouch}
             onMomentumScrollEnd={handleReleaseTouch}
             onResponderRelease={handleReleaseTouch}

@@ -8,17 +8,16 @@ import { styles as mobileStyles } from '../styles/mobile/SignIn'
 import { inject, observer } from 'mobx-react';
 import SwipableView from './subComponent/SwipableView';
 const styles = (Platform.OS === "web") ? webStyles : mobileStyles
-// AsyncStorage.setItem('test','hello world!')
-// AsyncStorage.getItem('test').then(res => console.log(res))
-
 const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user }) => {
     const { signInInputs, handleTextInput } = inputsStore
     const { email, password } = signInInputs
     const submit = async ()=> {
+        console.log(signInInputs);
         const res = await user.sign_in(signInInputs)
        
         if(res.status){
             navigator.redirect('feeds')
+            user.get_events()
             inputsStore.emptySignInForm()
         }else{
             Platform.OS === 'web' && alert(res.res)
@@ -70,6 +69,7 @@ const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator,
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigator.redirect('signUp')} style={styles.signUpBtn}>
+                    
                     <Text style={styles.sinUpBtnText} >Sign up</Text>
                 </TouchableOpacity>
             </View>
