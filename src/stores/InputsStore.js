@@ -1,4 +1,5 @@
 import { makeObservable, observable, action, computed } from "mobx"
+import moment from 'moment';
 
 class InputsStore {
     constructor() {
@@ -12,7 +13,7 @@ class InputsStore {
             email: "rami@naser.com",
             city: "Jerusalem",
             country: "Israel",
-            birthdate: 652917600000,
+            birthdate: Date.now(),
             mobile: "02323",
             image: null,
             gender: 1,
@@ -54,6 +55,7 @@ class InputsStore {
     }
 
     handleTextInput = (form, property, value) => {
+        console.log(value);
         this[form][property] = value
     }
     emptySignUpForm = () => {

@@ -11,6 +11,7 @@ import { styles as mobileStyles } from '../styles/mobile/SignUp'
 import { inject, observer } from 'mobx-react';
 import SwipableScrollView from './subComponent/SwipableScrollView'
 import SelectableButton from './subComponent/SelectableButton'
+import MyDatePicker from './subComponent/MyDatePicker'
 
 const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
@@ -67,6 +68,16 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                             value={mobile} onChangeText={(value) => handleTextInput('signUpInputs', 'mobile', value)}
                             textContentType="telephoneNumber" style={styles.input} />
                     </View>
+                  
+                    <Text style={styles.label}>Birthday</Text>
+                        <MyDatePicker
+                            value={inputsStore.newEventForm.date}
+                            onChange={inputsStore.handleTextInput}
+                            form="signUpInputs"
+                            property="birthdate"
+                            isMaxDate={false}
+                        />
+                  
 
                     <View style={styles.pickerContainer}>
                         <Text style={styles.label}>Gender</Text>
@@ -81,6 +92,7 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                         </Picker>
 
                     </View>
+
 
                     <View style={styles.pickerContainer}>
                         <Text style={styles.label}>Country</Text>
