@@ -116,7 +116,12 @@ const styles = StyleSheet.create({
     footer:{
         width:'100%',
         height:300,
-    }
+    },
+    mapContainer:{
+        width: '100%',
+        height: 200,
+    
+      }
 
 });
 

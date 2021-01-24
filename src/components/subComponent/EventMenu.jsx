@@ -5,6 +5,7 @@ import { styles as webStyles } from '../../styles/web/EventMenu'
 import { styles as mobileStyles } from '../../styles/mobile/EventMenu'
 import { inject, observer } from 'mobx-react'
 import AppHeader from './AppHeader'
+import Map from '../Map'
 const styles = mobileStyles
 
 const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user }) => {
@@ -61,6 +62,13 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                         <Picker.Item label="Monthly" value={"monthly"} />
                     </Picker>
 
+                </View>
+
+                <View style={styles.mapContainer}>
+                    <Map
+                       event={{longitudeDelta: 35.2137, latitudeDelta: 31.7683 , longitude: 35.2137, latitude: 31.7683}} 
+        
+                    ></Map>
                 </View>
 
                 <View style={styles.pickerContainer}>
