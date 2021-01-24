@@ -12,7 +12,7 @@ class InputsStore {
             email: "rami@naser.com",
             city: "Jerusalem",
             country: "Israel",
-            birthdate: 652917600000,
+            birthdate: Date.now(),
             mobile: "02323",
             image: null,
             gender: 1,
@@ -54,6 +54,7 @@ class InputsStore {
     }
 
     handleTextInput = (form, property, value) => {
+        console.log(value);
         this[form][property] = value
     }
     emptySignUpForm = () => {
@@ -63,10 +64,10 @@ class InputsStore {
             email: "",
             city: "",
             country: "",
-            birthdate: '',
+            birthdate: Date.now(),
             mobile: "",
             image: null,
-            gender: 0,
+            gender: 1,
             date: 0,
             password: '',
             confirmPassword: '',

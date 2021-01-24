@@ -32,7 +32,7 @@ export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user
 
         <View style={styles.mainFeedsContainer}>
 
-            <TouchableOpacity style={styles.floatingContainer}>
+             <TouchableOpacity style={styles.floatingContainer}>
                 <View style={styles.androidFloating} />
 
 
@@ -48,11 +48,11 @@ export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user
                     contentContainerStyle={styles.feedsScrollableContainer} >
                     <AppHeader />
 
-                    {user.events.map((f, i) => f.active && <EventFeed key={i} eventFeed={f} style={styles} />)}
+                    {user.events.map((f, i) => <EventFeed key={i} eventFeed={f} style={styles} />)}
                     <View style={styles.footer}>
                         <Text> feeds </Text>
                     </View>
-                </SwipableScrollView>}
+                </SwipableScrollView>} 
         </View>
     )
 }))
