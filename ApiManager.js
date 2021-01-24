@@ -52,7 +52,7 @@ class ApiManager {
     
     addFriend = async data => { 
         try {
-            const res = await axios.post(`${this.sPath}/post`, data)
+            const res = await axios.post(`${this.sPath}/user/user/addFriend`, data)
             return res
         } catch (err) { return err }
     }

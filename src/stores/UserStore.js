@@ -130,6 +130,13 @@ class UserStore {
         }
     }
 
+    add_friend = async (usersIds) => {
+        //TBD api create event
+        console.log(usersIds);
+        const friends = await apiManager.addEvent(usersIds)
+        console.log(friends);
+        
+    }
 
 }
 export default UserStore

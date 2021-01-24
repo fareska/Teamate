@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'mobx-react';
 import React, { useEffect } from 'react';
-import { View, SafeAreaView, Platform, Text } from 'react-native';
+import { View, SafeAreaView, Platform, Text, Image, StyleSheet, Button } from 'react-native';
 import { styles as webStyles } from './src/styles/web/App'
 import { styles as mobileStyles } from './src/styles/mobile/App'
 import NavigationStore from './src/stores/NavigationStore'
@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Feeds } from './src/components/Feeds';
 import { FloatingAction } from "react-native-floating-action";
 import MyDatePicker from './src/components/subComponent/MyDatePicker';
+import ProfilePage from './src/components/ProfilePage';
 
 // import DatePicker from './src/components/subComponent/customDateTimePicker'
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
@@ -33,20 +34,24 @@ const isUserSaved = async () => {
 }
 const stores = { navigator, user, inputsStore }
 export default function App() {
-
-  isUserSaved()
-
-  return (
+   isUserSaved()
+  // <Navigation />
+  
+  return(
     <Provider {...stores}>
       <View style={styles.mainContainer}>
-        <SafeAreaView style={styles.container} >
-
-          <Navigation />
-        
-        </SafeAreaView>
+    <SafeAreaView style={styles.container} >
+       <ProfilePage/>
+  
+    </SafeAreaView>
+  
       </View>
     </Provider>
-  );
+
+  )
+
 }
+
+
 
 
