@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
-import { View, StyleSheet, TextInput, Platform } from 'react-native';
+import { View, StyleSheet, TextInput, Platform, } from 'react-native';
 import DatePicker from 'react-native-datepicker';
+import DatePickerIOS from '@react-native-community/datetimepicker'
 import moment from 'moment';
 import { inject, observer } from 'mobx-react';
 
@@ -8,7 +9,7 @@ const MyDatePicker = inject('inputsStore')(observer(({ form, inputsStore, proper
 
   const value = Platform.OS ==='web'? 
   moment(inputsStore[form][property]).format('YYYY-MM-DD')
-  :moment(inputsStore[form][property]).format('DD-MM-YYYY')
+  :inputsStore[form][property]
 
   const dateTimeInputChangeHandler = ({ target }) => {
     const value = Date.parse(target.value)
@@ -19,33 +20,22 @@ const MyDatePicker = inject('inputsStore')(observer(({ form, inputsStore, proper
       {Platform.OS === 'web' ?
         <input type="date" datatype="DD-MM-YYYY" value={value} onChange={dateTimeInputChangeHandler} />
         :
-        <DatePicker
+        <DatePickerIOS
           showIcon={false}
-          androidMode="default"
+         display='spinner'
           style={{ width: 300 }}
           date={value}
+          value={new Date(value)}
           mode="date" 
-          placeholder="DD/MM/YYYY"
-          format="DD-MM-YYYY"
+          minimumDate={isMaxDate ? Date.now() :  null}
+          maximumDate={isMaxDate ? 999999999999999999999 : Date.now()}
+          accessibilityLabel='birthdate'
     
-          minDate={isMaxDate ? moment().format('DD-MM-YYYY') :  moment(0).format('DD-MM-YYYY')}
-          maxDate={isMaxDate ? '9/9/9999' : moment().format('DD-MM-YYYY')}
-          confirmBtnText="Confirm"
           cancelBtnText="Cancel"
-          customStyles={{
-            
-            dateInput: {
-              backgroundColor: 'white',
-              borderBottomWidth: 1,
-              borderBottomColor: 'black',
-              fontSize: 30,
           
-            },
-          
-          }}
-          onDateChange={(date) => {
-            date = moment(date, 'DD.MM.YYYY').format('YYYY-MM-DD')
-            inputsStore.handleTextInput(form, property, Date.parse(date))
+          onChange={(event,date) => {
+            date &&
+            inputsStore.handleTextInput(form, property,Date.parse(date) )
           }}
         />
       }

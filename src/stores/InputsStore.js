@@ -1,5 +1,4 @@
 import { makeObservable, observable, action, computed } from "mobx"
-import moment from 'moment';
 
 class InputsStore {
     constructor() {
@@ -65,10 +64,10 @@ class InputsStore {
             email: "",
             city: "",
             country: "",
-            birthdate: '',
+            birthdate: Date.now(),
             mobile: "",
             image: null,
-            gender: 0,
+            gender: 1,
             date: 0,
             password: '',
             confirmPassword: '',

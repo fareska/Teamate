@@ -68,7 +68,7 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                             value={mobile} onChangeText={(value) => handleTextInput('signUpInputs', 'mobile', value)}
                             textContentType="telephoneNumber" style={styles.input} />
                     </View>
-                  
+                    <View style={styles.pickerContainer}>
                     <Text style={styles.label}>Birthday</Text>
                         <MyDatePicker
                             value={inputsStore.newEventForm.date}
@@ -77,6 +77,7 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                             property="birthdate"
                             isMaxDate={false}
                         />
+                        </View>
                   
 
                     <View style={styles.pickerContainer}>
@@ -105,7 +106,6 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                         </Picker>
 
                     </View>
-
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Email</Text>
