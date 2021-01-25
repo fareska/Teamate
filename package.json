@@ -36,7 +36,10 @@
     "react-native-masked-text": "^1.13.0",
     "react-native-multiple-select": "^0.5.6",
     "react-native-web": "^0.13.18",
-    "react-router-dom": "^5.2.0"
+    "react-native-web-maps": "^0.3.0",
+    "react-router-dom": "^5.2.0",
+    "save": "^2.4.0",
+    "expo-permissions": "~10.0.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

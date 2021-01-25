@@ -1,35 +1,51 @@
-import { Platform, StyleSheet, Dimensions,StatusBar } from 'react-native'
+import { Platform, StyleSheet, Dimensions, StatusBar } from 'react-native'
 import { colors } from '../COLORS'
-const { primary, secondary,grey } = colors
+const { primary, secondary, grey } = colors
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
-    feedsScrollable:{
-        flex:1,
-          width:'100%',
-          minHeight: windowHeight*1.5,
-          marginTop: 0,
-        
-        },
-        feedsScrollableContainer:{
-            width:'100%',
-          paddingTop: windowHeight * 0.55,
-          marginBottom: 200,
-            alignItems:'center',
-            backgroundColor: grey
-        },
-        footer:{
-            width:'100%',
-            height: 300,
-            alignItems:'center'
+  mainFeedsContainer: {
+    width: '100%',
+    backgroundColor: primary,
+    minHeight: windowHeight,
+    top: -30
 
+  },
+  feedsScrollable: {
+    width: '100%',
+    backgroundColor: primary,
+    minHeight: windowHeight,
+    top: 0,
+    paddingTop: 0,
 
-        },
-        floatingContainer:{
-          position:'absolute',
-          width:'100%',
-          height: windowHeight * 1.24
-        },
+  },
+  feedsScrollableContainer: {
+    width: '100%',
+    paddingTop: 0,
+    marginBottom: 200,
+    alignItems: 'center',
+    backgroundColor: grey
+  },
+  footer: {
+    width: '100%',
+    height: 300,
+    alignItems: 'center'
+
+  },
+  floatingContainer: {
+    width: 100,
+    top: windowHeight * 0.95,
+    zIndex: 9999,
+    alignSelf:'flex-end'
+
+  },
+  androidFloating: {
+    width: 100,
+    height: 100,
+    // alignSelf: 'flex-end'
+
+  },
+
 
 
 });

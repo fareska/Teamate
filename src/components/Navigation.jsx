@@ -11,7 +11,7 @@ const Navigation = inject('navigator', 'user')(observer(({ navigator, user }) =>
     const isSignedIn = () => {
         return user.user.id ? true : false
     }
-    console.log(isSignedIn());
+    
     switch (navigator.currentPage) {
         case "welcome":
             return isSignedIn() ? navigator.redirect('feeds') : <Welcome />

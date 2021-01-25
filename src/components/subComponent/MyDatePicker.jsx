@@ -1,11 +1,11 @@
 import React, { Component, useState } from 'react';
 import { View, StyleSheet, TextInput, Platform, TouchableHighlight,Text } from 'react-native';
 import DatePicker from 'react-native-datepicker';
-import DatePickerIOS from '@react-native-community/datetimepicker'
+import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment';
 import { inject, observer } from 'mobx-react';
 
-const MyDatePicker = inject('inputsStore')(observer(({ form, inputsStore, property, isMaxDate }) => {
+const MyDatePicker = inject('inputsStore')(observer(({ form, inputsStore, property, isMaxDate , type}) => {
   const [showDatePicker, setDatePicker] = useState(false)
   const value = Platform.OS === 'web' ?
     moment(inputsStore[form][property]).format('YYYY-MM-DD')
@@ -22,13 +22,12 @@ const MyDatePicker = inject('inputsStore')(observer(({ form, inputsStore, proper
           <input type="date" datatype="DD-MM-YYYY" value={value} placeholder="date" onChange={dateTimeInputChangeHandler} />
         </View>
           :
-          <DatePickerIOS
+          <DateTimePicker
             showIcon={false}
-            display='spinner'
             style={{ width: 300 }}
             date={value}
             value={new Date(value)}
-            mode="date"
+            mode={type || "date"}
             minimumDate={isMaxDate ? Date.now() : null}
             maximumDate={isMaxDate ? 999999999999999999999 : Date.now()}
             accessibilityLabel='birthdate'
@@ -60,15 +59,15 @@ const MyDatePicker = inject('inputsStore')(observer(({ form, inputsStore, proper
           textAlign:'center',
           fontSize:30,
           fontWeight: '600'
-        }}>{new Date(value).toLocaleDateString()}</Text>
+        }}>{type ==='time'?new Date(value).toLocaleTimeString():new Date(value).toLocaleDateString()}</Text>
 
-        {showDatePicker && <DatePickerIOS
+        {showDatePicker && <DateTimePicker
           showIcon={false}
           display='spinner'
           style={{ width: 300 }}
           date={value}
           value={new Date(value)}
-          mode="date"
+          mode={type || "date"}
           minimumDate={isMaxDate ? Date.now() : null}
           maximumDate={isMaxDate ? 999999999999999999999 : Date.now()}
           accessibilityLabel='birthdate'

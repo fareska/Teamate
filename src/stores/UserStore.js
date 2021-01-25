@@ -2,6 +2,9 @@
 import { observable, action, makeAutoObservable, runInAction } from 'mobx'
 import AsyncStorage from '@react-native-community/async-storage'
 import ApiManager from '../../ApiManager'
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+
 const apiManager = new ApiManager()
 
 class UserStore {
@@ -11,7 +14,7 @@ class UserStore {
         this.match = []
         this.events = []
         this.profile = {}
-
+        this.currentCoordinates = {}
         makeAutoObservable(this, {
             user: observable,
             friends: observable,
@@ -25,7 +28,9 @@ class UserStore {
             get_user_by_id: action,
             askToJoin: action,
             get_profile_by_id: action,
-            profile: observable
+            profile: observable,
+            currentCoordinates:observable,
+            getLocationAsync: action
 
         })
     }
@@ -37,25 +42,19 @@ class UserStore {
         this.user.sports = user.sport
     }
     askToJoin = async (userId, postId) => {
-        console.log(userId, postId);
         try {
             const res = await apiManager.addParti({ userId, postId })
             await this.get_events()
-            console.log(res);
             return res
         } catch (error) {
-            console.log(error);
         }
     }
-
-
     sign_in = async data => {
         let user
         data.email = data.email.split(' ').join('')
         try {
             user = await apiManager.signIn(data)
         } catch (error) {
-            console.log(error);
             return error
         }
         if (user !== null) {
@@ -84,7 +83,6 @@ class UserStore {
         data.birthDate = data.birthdate
         delete data.birthdate
         const signUpRes = await apiManager.signUp(data)
-        console.log(signUpRes);
         // const signInRes = await this.sign_in({email: data.email, password: data.password})
         // this.assingNewValues(user)
         return signUpRes
@@ -93,7 +91,6 @@ class UserStore {
         //TBD api create event
 
         const event = await apiManager.addEvent(newEvent)
-        console.log(event);
         await this.get_events()
         return event
     }
@@ -149,13 +146,29 @@ class UserStore {
     }
 
     add_friend = async (usersIds) => {
-        //TBD api create event
-        console.log(usersIds);
         const friends = await apiManager.addEvent(usersIds)
         this.get_user_by_id(usersIds.mainUserId)
-        // console.log(friends);
 
     }
+
+    getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+          return {
+            error: 'Permission to access location was denied',
+          }
+        }
+      
+        let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
+        const { latitude, longitude } = location.coords
+        
+        runInAction(()=>{
+
+            this.currentCoordinates = { latitude, longitude, latitudeDelta: latitude, longitudeDelta: longitude }
+        })
+        
+      
+      };
 
 }
 export default UserStore

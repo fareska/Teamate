@@ -33,14 +33,11 @@ const styles = StyleSheet.create({
     }, 
     header:{
         flex:1, 
-        width: '100%',
-        height: windowHeight * 0.25,     
-        position:'absolute',
-        justifyContent: 'flex-end', 
-        top: 0,   
+        width: '100%',          
+        justifyContent: 'flex-end',   
         backgroundColor: primary,
-        padding: 20,
-        zIndex: 99,
+        padding: 20,  
+       
   
     },
     headerTitle:{

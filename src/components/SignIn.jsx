@@ -61,7 +61,7 @@ const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator,
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.touchableButton} onPress={() => console.log('touched')}>
+                <TouchableOpacity style={styles.touchableButton} onPress={() => console.log('facebook')}>
                     <View style={styles.signInBtnFacebook}>
                         <Text style={styles.btnText}>
                             Facebook

@@ -121,7 +121,10 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 200,
     
-      }
+      },flag:{
+        width: 30,
+        height:30
+    }
 
 });
 
