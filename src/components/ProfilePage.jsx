@@ -4,11 +4,12 @@ import { View, Text, Image, StyleSheet, Button, SafeAreaView, ScrollView } from 
 // import { styles as webStyles } from '../styles/web/SignIn'
 import { styles as mobileStyles } from '../styles/mobile/ProfilePage'
 import { inject, observer } from 'mobx-react';
+import SwipableView from './subComponent/SwipableView';
 
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const styles = mobileStyles
 
-const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user }) => {
+const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user, navigator}) => {
 
     const [addFriendButton, setAddFriendButton] = useState(false)
 
@@ -26,8 +27,8 @@ const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user 
     }
 
     return (
-
-        <SafeAreaView style={styles.container}>
+        <SwipableView style={styles.container}>
+            <Button title="Back" onPress={navigator.previous}/>
             <View>
                 <Text>ProfilePage</Text>
                 <Image source={{
@@ -44,7 +45,7 @@ const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user 
                         title="Add Friend"
                         disabled = {addFriendButton}
                         onPress={add_friend}
-                    />
+                        />
                  
 
 
@@ -86,7 +87,7 @@ const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user 
                                 width: 25,
                                 uri: "https://picsum.photos/200/300"
                             }}
-                        /><Text>Sport at address, City, date</Text>
+                            /><Text>Sport at address, City, date</Text>
                     </View>
 
 
@@ -98,16 +99,16 @@ const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user 
                                 width: 25,
                                 uri: "https://picsum.photos/200/300"
                             }}
-                        /><Text>Sport at address, City, date</Text>
+                            /><Text>Sport at address, City, date</Text>
                     </View>
 
                 </View>
             </ScrollView>
-        </SafeAreaView>
+            </SwipableView>
 
 
     );
-
+    
 }))
 
 
