@@ -9,12 +9,10 @@ class ApiManager {
     }
 
     signIn = async data => {
-        console.log(data);
         console.log('apiManager received request');
         try {
             const user = await axios.post(`${this.sPath}/user/user/emailPass`, data)
             console.log('request resolved');
-            console.log(user.data)
             return user.data
         } catch (error) {
             console.log(error)
@@ -37,7 +35,6 @@ class ApiManager {
         console.log(id);
         try {
         const data = await axios.get(`${this.sPath}/user/user/${id}`)
-        console.log(data.data);
         return data.data 
         } catch (error) {
             console.log(error);

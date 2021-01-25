@@ -41,7 +41,7 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
 
                 <Text>{`${city}, ${country}`}</Text>
                 <Text>{"Date: " + new Date(date).toLocaleDateString()}</Text>
-                <Text>{`Time: ${new Date(time).getHours()}:${new Date(time).getMinutes()} `}</Text>
+                <Text>{`Time: ${new Date(time).toLocaleTimeString()} `}</Text>
                 <Text>{`Recurrence: ${frequency}`}</Text>
                 <Text>{`Number of Participant: ${partis.length}/${people_num}`}</Text>
                 <TouchableOpacity onPress={askToJoin} style={styles.signUpBtn}>

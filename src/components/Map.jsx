@@ -1,5 +1,5 @@
 import { inject, observer } from 'mobx-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,22 +8,22 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 const map = inject('inputsStore', 'user')(observer((props) => {
   const { newEventForm, handleTextInput } = props.inputsStore
+  const {currentCoordinates} = props.user
+  const location ={...currentCoordinates }
   const markerTA = {
     latitude: newEventForm.lat,
     longitude: newEventForm.lon,
     latitudeDelta: newEventForm.lat,
     longitudeDelta: newEventForm.lon
   }
+  
   const onMapClick = e => {
     const { latitude, longitude } = e.nativeEvent.coordinate
     handleTextInput('newEventForm', 'lon', longitude)
     handleTextInput('newEventForm', 'lat', latitude)
   }
   const camera = {
-    center: {
-      latitude: props.event.latitude,
-      longitude: props.event.longitude,
-    },
+    center:location,
     pitch: 1,
     heading: 1,
     altitude: 1,
@@ -34,11 +34,12 @@ const map = inject('inputsStore', 'user')(observer((props) => {
     <View style={styles.container}>
       <MapView
         provider={PROVIDER_GOOGLE}
-        ref={map => _map = map}
         onPress={onMapClick}
         showsUserLocation={true}
+        followsUserLocation={true}
         style={styles.map}
         initialCamera={camera}
+
       >
         <Marker
           coordinate={markerTA}
@@ -66,3 +67,4 @@ const styles = StyleSheet.create({
     bottom: 0,
   }
 });
+

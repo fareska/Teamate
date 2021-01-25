@@ -71,7 +71,7 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                     <View style={styles.pickerContainer}>
                     <Text style={styles.label}>Birthday</Text>
                         <MyDatePicker
-                            value={inputsStore.newEventForm.date}
+                            value={signUpInputs.birthdate}
                             onChange={inputsStore.handleTextInput}
                             form="signUpInputs"
                             property="birthdate"

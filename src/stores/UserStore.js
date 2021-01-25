@@ -2,6 +2,9 @@
 import { observable, action, makeAutoObservable, runInAction } from 'mobx'
 import AsyncStorage from '@react-native-community/async-storage'
 import ApiManager from '../../ApiManager'
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+
 const apiManager = new ApiManager()
 
 class UserStore {
@@ -11,7 +14,7 @@ class UserStore {
         this.match = []
         this.events = []
         this.profile = {}
-
+        this.currentCoordinates = {}
         makeAutoObservable(this, {
             user: observable,
             friends: observable,
@@ -25,7 +28,9 @@ class UserStore {
             get_user_by_id: action,
             askToJoin: action,
             get_profile_by_id: action,
-            profile: observable
+            profile: observable,
+            currentCoordinates:observable,
+            getLocationAsync: action
 
         })
     }
@@ -44,8 +49,6 @@ class UserStore {
         } catch (error) {
         }
     }
-
-
     sign_in = async data => {
         let user
         data.email = data.email.split(' ').join('')
@@ -147,6 +150,25 @@ class UserStore {
         this.get_user_by_id(usersIds.mainUserId)
 
     }
+
+    getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+          return {
+            error: 'Permission to access location was denied',
+          }
+        }
+      
+        let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
+        const { latitude, longitude } = location.coords
+        
+        runInAction(()=>{
+
+            this.currentCoordinates = { latitude, longitude, latitudeDelta: latitude, longitudeDelta: longitude }
+        })
+        
+      
+      };
 
 }
 export default UserStore

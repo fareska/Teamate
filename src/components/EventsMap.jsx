@@ -24,12 +24,11 @@ const EventsMap = inject('inputsStore', 'user', 'navigator')(observer((props) =>
     const { events } = props.user
     const [eventToShow, setEventToShow] = useState({})
     const [showEvent, setShowEvent] = useState(false)
+    const {currentCoordinates} = props.user
+  const location ={...currentCoordinates }
 
     const camera = {
-        center: {
-            latitude: 31.7683,
-            longitude: 35.2137,
-        },
+        center: location,
         pitch: 1,
         heading: 1,
         altitude: 1,

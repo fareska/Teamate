@@ -24,8 +24,8 @@ class InputsStore {
         this.newEventForm = {
             sport: '',
             frequency: '',
-            date: 0,
-            time: 0,
+            date: Date.now(),
+            time: Date.now(),
             people_num: 0,
             city: '',
             country: '',
@@ -48,15 +48,16 @@ class InputsStore {
             emptySignInForm: action,
             emptySignPassword: action,
             handleSelectableInput: action,
-            emptyNewEventForm:action
+            emptyNewEventForm: action
 
 
         })
     }
 
     handleTextInput = (form, property, value) => {
-    
+
         this[form][property] = value
+
     }
     emptySignUpForm = () => {
         this.signUpInputs = {
@@ -85,12 +86,12 @@ class InputsStore {
     emptySignPassword = () => {
         this.signInInputs.password = ''
     }
-    emptyNewEventForm = () =>{
+    emptyNewEventForm = () => {
         this.newEventForm = {
             sport: '',
             frequency: '',
-            date: 0,
-            time: 0,
+            date: Date.now(),
+            time: Date.now(),
             people_num: 0,
             city: '',
             country: '',
@@ -114,7 +115,7 @@ class InputsStore {
 export default InputsStore
 
 const sports = [
-   
+
     { id: 1, selected: false, sport: 'Football' },
     { id: 2, selected: false, sport: 'Boxing' },
     { id: 3, selected: false, sport: 'Surfing' },
