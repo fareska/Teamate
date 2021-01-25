@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 
     sports: {
         marginTop:10,
-        width:'30',
+        width:30,
         backgroundColor: 'grey',
         flexDirection: 'row',
         justifyContent: 'space-evenly',

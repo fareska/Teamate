@@ -12,15 +12,22 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
         const res = await user.askToJoin(user.user.id, id)
         console.log(res);
     }
+    const showProfile =async ()=>{
+        await user.get_profile_by_id(eventFeed.user_id)
+        navigator.redirect('profilePage',eventFeed.user_id)
+    }
     return (
         <View style={styles.feedContainer}>
             <View style={styles.feedSubContainer}>
+                <TouchableOpacity onPress={showProfile}>
+
                 <View style={styles.feedHeader}>
                     <Image source={profilIcon} style={styles.profileImage} />
                     <View >
                         <Text style={styles.feedTitle}>{sport}</Text>
                     </View>
                 </View>
+                </TouchableOpacity>
                 <View style={styles.feedContent}>
 
                 </View>

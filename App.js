@@ -35,13 +35,12 @@ const isUserSaved = async () => {
 const stores = { navigator, user, inputsStore }
 export default function App() {
    isUserSaved()
-   
+
    return(
      <Provider {...stores}>
       <View style={styles.mainContainer}>
     <SafeAreaView style={styles.container} >
-       {/* <ProfilePage/> */}
-       
+
       <Navigation />
   
     </SafeAreaView>

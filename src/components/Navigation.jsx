@@ -1,6 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React from 'react'
 import { Feeds } from './Feeds';
+import ProfilePage from './ProfilePage';
 import SignIn from './SignIn';
 import { SignUp } from './SignUp';
 import Welcome from './welcome';
@@ -19,6 +20,8 @@ const Navigation = inject('navigator', 'user')(observer(({ navigator, user }) =>
             return isSignedIn() ? navigator.redirect('feeds') : <SignUp />
         case 'feeds':
             return isSignedIn() ? <Feeds /> : navigator.redirect('signIn')
+        case 'profilePage':
+            return isSignedIn() ? <ProfilePage /> : navigator.redirect('signIn')
     }
 
 

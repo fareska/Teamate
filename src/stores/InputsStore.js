@@ -7,19 +7,19 @@ class InputsStore {
             password: ''
         }
         this.signUpInputs = {
-            first: 'rami',
-            last: "naser",
-            email: "rami@naser.com",
-            city: "Jerusalem",
-            country: "Israel",
+            first: '',
+            last: "",
+            email: "",
+            city: "",
+            country: "",
             birthdate: Date.now(),
-            mobile: "02323",
+            mobile: "",
             image: null,
-            gender: 1,
+            gender: 0,
             date: 0,
-            password: 'qweqweqwe',
-            confirmPassword: 'qweqweqwe',
-            sports: ["basketball"]
+            password: '',
+            confirmPassword: '',
+            sports: []
         }
         this.newEventForm = {
             sport: '',
@@ -98,7 +98,7 @@ class InputsStore {
 export default InputsStore
 
 const sports = [
-    { id: 0, selected: false, sport: '' },
+   
     { id: 1, selected: false, sport: 'Football' },
     { id: 2, selected: false, sport: 'Boxing' },
     { id: 3, selected: false, sport: 'Surfing' },
