@@ -1,93 +1,70 @@
+
 import React, { useState } from 'react'
 import { render } from 'react-dom'
-import { View, Text, Image, StyleSheet, Button, SafeAreaView, ScrollView } from 'react-native'
+import { View, Text, Image, Button } from 'react-native'
 // import { styles as webStyles } from '../styles/web/SignIn'
-import { styles as mobileStyles } from '../styles/mobile/ProfilePage'
+import { styles as mobileStyles } from '../../styles/mobile/ProfilePage'
 import { inject, observer } from 'mobx-react';
-import SwipableView from './subComponent/SwipableView';
-import ProfileData from './subComponent/ProfileData';
-// import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
 // import profileIcon from '../../assets/profileIcon.jpg'
 
 
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const styles = mobileStyles
 
-const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user, navigator }) => {
+
+
+
+
+const ProfileData = inject('navigator', 'user', 'inputsStore')(observer(({ user, navigator }) => {
 
     const [addFriendButton, setAddFriendButton] = useState(false)
 
     const { profile } = user
-
-    console.log(profile);
 
     const add_friend = async () => {
         setAddFriendButton(true)
         console.log('Simple Button pressed')
         let data = { mainUserId: user.user.id, subUserId: profile.id }
         const res = await user.add_friend(data)
-        // console.log(user);
-        // console.log(res);
     }
 
     return (
-        <SwipableView style={styles.container}>
-            <Button title="Back" onPress={navigator.previous} />
+        <View>
+            <View style={styles.buttonContainer} >
+                <Text>ProfileData</Text>
+                <Button title='Edit' style={styles.editButton} />
+            </View>
 
-            <ProfileData />
-
-            <View><Text>Friends</Text></View>
-
-            <View style={styles.friends}>
-                {friends.map((f, i) =>
-                    <Image style={styles.image} key={i} source={{
-                        height: 75,
-                        width: 75,
-                        uri: f.image
-                    }} />)}
-                <Button title='Show all' />
+            <View style={styles.dataConatiner}>
+                <Image source={{
+                    width: 100,
+                    height: 100,
+                    uri: 'https://picsum.photos/200/300'
+                }} />
+                <Text>{profile.user.first} {profile.user.last} </Text>
+                <Text>{profile.user.country}, {profile.user.city}</Text>
+                <Text>{profile.user.birthdate}</Text>
+                <Text>Bio, Say something</Text>
             </View>
 
 
-            <View>
-                <Text>Sports</Text>
-                {profile.sport.map((s, i) => <View key={i} style={styles.sports} ><Text>{s}</Text></View>)}
-                <Button title='Add Sport' style={styles.editButton} />
-            </View>
-
-            <ScrollView>
-                <View>
-                    <Text>Events</Text>
-                    <View>
-                                        
-                    </View>
-                    <View style={styles.friends} >
-                        <Image style={styles.image}
-                            source={{
-                                height: 25,
-                                width: 25,
-                                uri: "https://picsum.photos/200/300"
-                            }}
-                        /><Text>Sport at address, City, date</Text>
-                    </View>
-
-
-
-                    <View style={styles.friends} >
-                        <Image style={styles.image}
-                            source={{
-                                height: 25,
-                                width: 25,
-                                uri: "https://picsum.photos/200/300"
-                            }}
-                        /><Text>Sport at address, City, date</Text>
-                    </View>
-
+            <View style={styles.buttonContainer} >
+                <View style={styles.Button} >
+                    <Button
+                        title="Add Friend"
+                        disabled={addFriendButton}
+                        onPress={add_friend}
+                    />
                 </View>
-            </ScrollView>
-        </SwipableView>
+                <View style={styles.Button} >
+                    <Button
+                        title="Message"
+                        onPress={() => console.log('Simple Message Button pressed')}
+                    />
+                </View>
+            </View>
+
+        </View>
 
 
     );
@@ -590,4 +567,4 @@ const events = [
     }
 ]
 
-export default ProfilePage
+export default ProfileData
