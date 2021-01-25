@@ -5,6 +5,7 @@ import { styles as webStyles } from '../../styles/web/Feed'
 import { styles as mobileStyles } from '../../styles/mobile/Feed'
 import { FloatingAction } from "react-native-floating-action";
 import profilIcon from '../../../assets/profileIcon.jpg'
+import Loading from './Loading'
 const styles = mobileStyles
 const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
@@ -13,8 +14,10 @@ const alertMessage = function (msg) {
 const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, user }) => {
     const { id, time, date, description, country, city, frequency, sport, partis,people_num } = eventFeed
     const askToJoin = async () => {
+        navigator.loading(true)
         const res = await user.askToJoin(user.user.id, id)
         if (res.data) {
+            navigator.loading(false)
             alertMessage(res.data)
         }
     }
@@ -24,6 +27,7 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
     }
     return (
         <View style={styles.feedContainer}>
+              
             <View style={styles.feedSubContainer}>
                 <TouchableOpacity onPress={showProfile}>
 

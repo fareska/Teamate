@@ -7,9 +7,12 @@ import { styles as webStyles } from '../../styles/web/Feed'
 import { styles as mobileStyles } from '../../styles/mobile/Feed'
 const styles = mobileStyles
 
-const MapMarker = inject('navigator', 'user')(observer(({ navigator, eventFeed, user }) => {
+const MapMarker = inject('navigator', 'user')(observer(({ navigator, eventFeed, user,setShowEvent }) => {
     return (   
-                <View style={styles.markerEventContainer}>          
+                <View style={styles.markerEventContainer}>  
+                <TouchableOpacity style={styles.closeBtn} onPress={()=>setShowEvent(false)}>
+                    <View style={styles.closeBtnContainer}><Text style={styles.closeBtnTxt}>x</Text></View>
+                    </TouchableOpacity>        
                     <EventFeed eventFeed={eventFeed} style={styles} />
                 </View>
 

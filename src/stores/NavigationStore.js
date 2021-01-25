@@ -5,7 +5,9 @@ class NavigationStore {
         this.history = [page]
         this.user_id=0
         this.EventMenu = false
+        this.isLoading = false
         makeObservable(this,{
+            isLoading:observable,
             history:observable, 
             EventMenu:observable, 
             user_id:observable,
@@ -14,12 +16,16 @@ class NavigationStore {
             showEventMenu:action,
             hideEventMenu:action,
             currentPage:computed,
+            loading:action
 
         }) 
     }
     get currentPage(){ 
         const i = this.history.length - 1
         return this.history[this.history.length-1]
+    }
+    loading= (status)=>{
+        this.isLoading =status
     }
     redirect= (page,user_id) => {
         this.history.push(page)

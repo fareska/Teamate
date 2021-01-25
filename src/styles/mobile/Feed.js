@@ -58,6 +58,27 @@ const styles = StyleSheet.create({
          width: 50,
          height:50,
          backgroundColor:secondary
+     },
+     closeBtn:{
+         top:40,
+         right:0,
+         alignSelf:'flex-end',
+        alignItems:'flex-end',
+        zIndex:99999,
+        width:50,
+        height:50,
+
+     },
+     closeBtnContainer:{
+         width:'100%',
+         height:'100%'
+     },
+     closeBtnTxt:{
+         fontSize:30,
+         zIndex:999,
+         textAlign:'center',
+         color:'grey',
+      
      }
 
 

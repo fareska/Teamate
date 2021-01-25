@@ -16,6 +16,7 @@ import MapMarker from './subComponent/MapMarker';
 import flag from '../../assets/flag.png'
 import { styles as webStyles } from '../styles/web/Eventsmap'
 import { styles as mobileStyles } from '../styles/mobile/Eventsmap'
+import Loading from './subComponent/Loading';
 const styles = mobileStyles
 
 
@@ -50,12 +51,14 @@ const EventsMap = inject('inputsStore', 'user', 'navigator')(observer((props) =>
                 position: 'absolute',
                 zIndex: 9999
             }}>
+            {props.navigator.isLoading ? <Loading /> : <View />}
+
 
                 <AppHeader viewMapBtn={false} viewLogoutBtn={false} viewBackButton={true}/>
             </View>
             {showEvent ?
                 <View style={styles.showEventContainer}>
-                    <MapMarker eventFeed={eventToShow} />
+                    <MapMarker eventFeed={eventToShow} setShowEvent={setShowEvent}/>
                 </View> : <View />}
             <View style={styles.container}>
 
