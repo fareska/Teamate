@@ -10,6 +10,7 @@ class UserStore {
         this.friends = []
         this.match = []
         this.events = []
+        this.profile = {}
 
         makeAutoObservable(this, {
             user: observable,
@@ -22,7 +23,10 @@ class UserStore {
             create_event: action,
             get_events: action,
             get_user_by_id: action,
-            askToJoin:action
+            askToJoin: action,
+            get_profile_by_id: action,
+            profile: observable
+
         })
     }
 
@@ -33,12 +37,12 @@ class UserStore {
         this.user.sports = user.sport
     }
     askToJoin = async (userId, postId) => {
-        console.log(userId,postId);
+        console.log(userId, postId);
         try {
             const res = await apiManager.addParti({ userId, postId })
-           await this.get_events()
-           console.log(res);
-           return res
+            await this.get_events()
+            console.log(res);
+            return res
         } catch (error) {
             console.log(error);
         }
@@ -109,7 +113,6 @@ class UserStore {
         runInAction(() => {
             this.events = events
         })
-        console.log(this.events);
     }
 
     get_user_by_id = async id => {
@@ -129,7 +132,31 @@ class UserStore {
             return { status: false }
         }
     }
+    get_profile_by_id = async id => {
+        const user = await apiManager.getUserById(id)
+        if (user !== null) {
+            if (user.user) {
+                runInAction(() => {
+                    this.profile = user
+                    this.profile.id = id
+                })
+                return { status: true }
+            } else {
+                return { status: false, res: user }
+            }
+        } else {
+            return { status: false }
+        }
+    }
 
+    add_friend = async (usersIds) => {
+        //TBD api create event
+        console.log(usersIds);
+        const friends = await apiManager.addEvent(usersIds)
+        this.get_user_by_id(usersIds.mainUserId)
+        // console.log(friends);
+
+    }
 
 }
 export default UserStore
