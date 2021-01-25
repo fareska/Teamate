@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     pickerContainer: {
         width: '100%',
-        height: Platform.OS === 'ios' ? 200 : 100,
+        height: Platform.OS === 'ios' ? 300 : 100,
         marginTop: 30,
         zIndex: 10
     },
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
     },
     picker: {
-        marginTop: Platform.OS === 'ios' ? 0 : 30,
+        marginTop: 30,
         top: Platform.OS === 'ios' ? -10 : 0,
         width: '100%',
         height: 30,

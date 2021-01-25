@@ -37,14 +37,11 @@ class UserStore {
         this.user.sports = user.sport
     }
     askToJoin = async (userId, postId) => {
-        console.log(userId, postId);
         try {
             const res = await apiManager.addParti({ userId, postId })
             await this.get_events()
-            console.log(res);
             return res
         } catch (error) {
-            console.log(error);
         }
     }
 
@@ -55,7 +52,6 @@ class UserStore {
         try {
             user = await apiManager.signIn(data)
         } catch (error) {
-            console.log(error);
             return error
         }
         if (user !== null) {
@@ -84,7 +80,6 @@ class UserStore {
         data.birthDate = data.birthdate
         delete data.birthdate
         const signUpRes = await apiManager.signUp(data)
-        console.log(signUpRes);
         // const signInRes = await this.sign_in({email: data.email, password: data.password})
         // this.assingNewValues(user)
         return signUpRes
@@ -93,7 +88,6 @@ class UserStore {
         //TBD api create event
 
         const event = await apiManager.addEvent(newEvent)
-        console.log(event);
         await this.get_events()
         return event
     }
@@ -149,11 +143,8 @@ class UserStore {
     }
 
     add_friend = async (usersIds) => {
-        //TBD api create event
-        console.log(usersIds);
         const friends = await apiManager.addEvent(usersIds)
         this.get_user_by_id(usersIds.mainUserId)
-        // console.log(friends);
 
     }
 

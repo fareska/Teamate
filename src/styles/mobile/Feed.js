@@ -47,6 +47,18 @@ const styles = StyleSheet.create({
      feedTitle:{
         fontSize:30,
      },
+     mapMarkerContainer:{
+         zIndex:999999999
+
+     },flagIcon:{
+         width: 30,
+         height:30
+     },
+     flagContainer:{
+         width: 50,
+         height:50,
+         backgroundColor:secondary
+     }
 
 
 });

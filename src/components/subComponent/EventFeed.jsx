@@ -1,16 +1,22 @@
 import { inject, observer } from 'mobx-react'
 import React from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native'
 import { styles as webStyles } from '../../styles/web/Feed'
 import { styles as mobileStyles } from '../../styles/mobile/Feed'
 import { FloatingAction } from "react-native-floating-action";
 import profilIcon from '../../../assets/profileIcon.jpg'
 const styles = mobileStyles
+const alertMessage = function (msg) {
+    Platform.OS === 'web' && alert(msg)
+    Alert.alert(msg)
+}
 const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, user }) => {
     const { id, time, date, description, country, city, frequency, sport, partis,people_num } = eventFeed
     const askToJoin = async () => {
         const res = await user.askToJoin(user.user.id, id)
-        console.log(res);
+        if (res.data) {
+            alertMessage(res.data)
+        }
     }
     const showProfile =async ()=>{
         await user.get_profile_by_id(eventFeed.user_id)

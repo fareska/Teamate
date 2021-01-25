@@ -22,8 +22,7 @@ const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user,
         console.log('Simple Button pressed')
         let data = { mainUserId: user.user.id, subUserId:profile.id }
         const res = await user.add_friend(data)
-        // console.log(user);
-        // console.log(res);
+      
     }
 
     return (

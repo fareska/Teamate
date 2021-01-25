@@ -19,19 +19,14 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
         newEvent.user_id=user.user.id
         try {
             const res = await user.create_event(newEvent)
-            
-
             if (res.data) {  
                 alertMessage('Event added successfully!')
                 inputsStore.emptyNewEventForm()
                 navigator.hideEventMenu()
-            }
-            
+            }           
         } catch (error) {
             console.log(error);
         }
-
-
     }
     return (
         <ScrollView style={styles.EventMenu}
@@ -50,7 +45,6 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                         enabled={true}>
                         {sports.map(s => <Picker.Item label={s.sport} value={s.sport} key={s.id} />)}
                     </Picker>
-
                 </View>
                 <View style={styles.pickerContainer}>
                     <Text style={styles.label}>Number of participants</Text>
@@ -61,10 +55,7 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                         enabled={true}>
                         {nums.map(n => <Picker.Item label={n} value={n} key={n} />)}
                     </Picker>
-
                 </View>
-
-
                 <View style={styles.pickerContainer}>
                     <Text style={styles.label}>Repeat</Text>
                     <Picker style={styles.picker}
@@ -78,9 +69,7 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                         <Picker.Item label="Weekly" value={"weekly"} />
                         <Picker.Item label="Monthly" value={"monthly"} />
                     </Picker>
-
                 </View>
-
                 <View style={styles.mapContainer}>
                     <Map
                        event={{longitudeDelta: 35.2137, latitudeDelta: 31.7683 , longitude: 35.2137, latitude: 31.7683}} 

@@ -6,7 +6,7 @@ import { inject, observer } from 'mobx-react'
 
 const styles = mobileStyles
 
-const AppHeader = inject('navigator','user')(observer(({ navigator,user, viewMapBtn, viewLogoutBtn }) => {
+const AppHeader = inject('navigator','user')(observer(({ navigator,user, viewMapBtn, viewLogoutBtn,viewBackButton }) => {
     
     const logoutHandler = ()=>{
         user.sign_out()
@@ -14,7 +14,7 @@ const AppHeader = inject('navigator','user')(observer(({ navigator,user, viewMap
     }
     return (
         <View style={styles.header}>
-            <Button title="Back" onPress={navigator.previous}/>
+            {viewBackButton?<Button title="Back" onPress={navigator.previous}/>:<View/>}
            {viewLogoutBtn? <Button title="Log out" onPress={logoutHandler}/>: <View/> }
             {viewMapBtn?<Button title="map" onPress={()=> navigator.redirect('eventsMap')}/>: <View/>}
             <Text style={styles.headerTitle}>TeaMate</Text>
