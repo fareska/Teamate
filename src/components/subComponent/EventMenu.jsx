@@ -6,6 +6,7 @@ import { styles as mobileStyles } from '../../styles/mobile/EventMenu'
 import { inject, observer } from 'mobx-react'
 import AppHeader from './AppHeader'
 import Map from '../Map'
+import MyDatePicker from './MyDatePicker'
 const styles = mobileStyles
 const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
@@ -15,15 +16,15 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
     const { sports, countries, newEventForm, handleTextInput } = inputsStore
     const { user_id, sport, frequency, date, time, people_num, city, country, description, lon, lat, address } = newEventForm
     const submit = async () => {
-        const newEvent ={...newEventForm}
-        newEvent.user_id=user.user.id
+        const newEvent = { ...newEventForm }
+        newEvent.user_id = user.user.id
         try {
             const res = await user.create_event(newEvent)
-            if (res.data) {  
+            if (res.data) {
                 alertMessage('Event added successfully!')
                 inputsStore.emptyNewEventForm()
                 navigator.hideEventMenu()
-            }           
+            }
         } catch (error) {
             console.log(error);
         }
@@ -57,6 +58,30 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                     </Picker>
                 </View>
                 <View style={styles.pickerContainer}>
+                    <Text style={styles.label}>Date</Text>
+                    <MyDatePicker
+                        value={inputsStore.newEventForm.date}
+                        onChange={inputsStore.handleTextInput}
+                        form="newEventForm"
+                        property="time"
+                        
+                        isMaxDate={false}
+                    />
+
+                </View>
+                <View style={styles.pickerContainer}>
+                    <Text style={styles.label}>Time</Text>
+                    <MyDatePicker
+                        value={inputsStore.newEventForm.date}
+                        onChange={inputsStore.handleTextInput}
+                        form="newEventForm"
+                        property="time"
+                        type="time"
+                        isMaxDate={true}
+                    />
+
+                </View>
+                <View style={styles.pickerContainer}>
                     <Text style={styles.label}>Repeat</Text>
                     <Picker style={styles.picker}
                         selectedValue={frequency}
@@ -70,10 +95,11 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                         <Picker.Item label="Monthly" value={"monthly"} />
                     </Picker>
                 </View>
+
                 <View style={styles.mapContainer}>
                     <Map
-                       event={{longitudeDelta: 35.2137, latitudeDelta: 31.7683 , longitude: 35.2137, latitude: 31.7683}} 
-        
+                        event={{ longitudeDelta: 35.2137, latitudeDelta: 31.7683, longitude: 35.2137, latitude: 31.7683 }}
+
                     ></Map>
                 </View>
 
