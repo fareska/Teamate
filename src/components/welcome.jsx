@@ -2,10 +2,10 @@ import { inject, observer } from 'mobx-react'
 import React from 'react'
 import { View, Text, Button } from 'react-native'
 
-const Welcome = inject("navigator")(observer(({navigator}) => {
-    return (
+const Welcome = inject("navigator",'user')(observer(({navigator, user}) => {
+    return ( 
         <View on style={{
-            flex:1,
+            flex:1, 
             alignItems: 'center',
             justifyContent: 'center'
         }}>

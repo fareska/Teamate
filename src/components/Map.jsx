@@ -6,8 +6,13 @@ import {
   Platform
 } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-const map = inject('inputsStore')(observer((props) => {
+
+
+
+
+const map = inject('inputsStore', 'user')(observer((props) => {
   const { newEventForm, handleTextInput } = props.inputsStore
+  const { events } = props.user
   const markerTA = {
     latitude: newEventForm.lat,
     longitude: newEventForm.lon,
@@ -47,22 +52,13 @@ const map = inject('inputsStore')(observer((props) => {
         onPress={onMapClick}
         showsUserLocation={true}
         style={styles.map}
-        // initialRegion={props.event}
         initialCamera={camera}
       >
-
-        {props.isAdd ? props.events.map((p, index) => (
-          <Marker
-            key={index}
-            coordinate={p}
-            title={p.sport}
-            description={p.description}
-          />)) :
           <Marker
             coordinate={markerTA}
             title={markerTA.title}
             description={markerTA.description}
-          />}
+          />
       </MapView>
     </View>
   );

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Text, View, Platform, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 import { inject, observer } from 'mobx-react';
@@ -27,6 +27,9 @@ export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user
         navigator.hideEventMenu()
         console.log('close');
     }
+    useEffect(() => {
+        user.get_events()
+    }, []) 
 
     return (
 
@@ -34,8 +37,6 @@ export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user
 
              <TouchableOpacity style={styles.floatingContainer}>
                 <View style={styles.androidFloating} />
-
-
                 <FloatingAction overlayColor={null}
                     onOpen={openEventMenu}
                     onClose={closeEventMenu}
@@ -46,7 +47,7 @@ export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user
                 <SwipableScrollView
                     style={styles.feedsScrollable}
                     contentContainerStyle={styles.feedsScrollableContainer} >
-                    <AppHeader />
+                    <AppHeader viewMapBtn={true} viewLogoutBtn={true}/>
 
                     {user.events.map((f, i) => <EventFeed key={i} eventFeed={f} style={styles} />)}
                     <View style={styles.footer}>

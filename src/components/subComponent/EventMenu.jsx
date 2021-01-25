@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { styles as webStyles } from '../../styles/web/EventMenu'
 import { styles as mobileStyles } from '../../styles/mobile/EventMenu'
@@ -7,14 +7,31 @@ import { inject, observer } from 'mobx-react'
 import AppHeader from './AppHeader'
 import Map from '../Map'
 const styles = mobileStyles
-
+const alertMessage = function (msg) {
+    Platform.OS === 'web' && alert(msg)
+    Alert.alert(msg)
+}
 const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user }) => {
     const { sports, countries, newEventForm, handleTextInput } = inputsStore
     const { user_id, sport, frequency, date, time, people_num, city, country, description, lon, lat, address } = newEventForm
-    const submit = () => {
+    const submit = async () => {
         const newEvent ={...newEventForm}
         newEvent.user_id=user.user.id
-        user.create_event(newEvent)
+        try {
+            const res = await user.create_event(newEvent)
+            
+
+            if (res.data) {  
+                alertMessage('Event added successfully!')
+                inputsStore.emptyNewEventForm()
+                navigator.hideEventMenu()
+            }
+            
+        } catch (error) {
+            console.log(error);
+        }
+
+
     }
     return (
         <ScrollView style={styles.EventMenu}

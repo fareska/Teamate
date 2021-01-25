@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
 
   },
   floatingContainer: {
-    width: '100%',
+    width: 100,
     top: windowHeight * 0.95,
     zIndex: 9999,
+    alignSelf:'flex-end'
 
   },
   androidFloating: {

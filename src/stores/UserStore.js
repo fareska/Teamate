@@ -61,7 +61,6 @@ class UserStore {
         if (user !== null) {
             if (user.user) {
                 this.assignNewValues(user)
-                await this.get_events()
                 AsyncStorage.setItem('userId', `${user.user.id}`)
                 return { status: true }
             } else {
@@ -92,10 +91,11 @@ class UserStore {
     }
     create_event = async newEvent => {
         //TBD api create event
-        console.log(newEvent);
+
         const event = await apiManager.addEvent(newEvent)
         console.log(event);
-        this.get_events()
+        await this.get_events()
+        return event
     }
 
     get_events = async () => {
@@ -123,7 +123,6 @@ class UserStore {
                     this.assignNewValues(user)
                     this.user.id = id
                 })
-                await this.get_events()
                 return { status: true }
             } else {
                 return { status: false, res: user }

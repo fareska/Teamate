@@ -47,14 +47,15 @@ class InputsStore {
             emptySignUpForm: action,
             emptySignInForm: action,
             emptySignPassword: action,
-            handleSelectableInput: action
+            handleSelectableInput: action,
+            emptyNewEventForm:action
 
 
         })
     }
 
     handleTextInput = (form, property, value) => {
-        console.log(value);
+    
         this[form][property] = value
     }
     emptySignUpForm = () => {
@@ -83,6 +84,21 @@ class InputsStore {
     }
     emptySignPassword = () => {
         this.signInInputs.password = ''
+    }
+    emptyNewEventForm = () =>{
+        this.newEventForm = {
+            sport: '',
+            frequency: '',
+            date: 0,
+            time: 0,
+            people_num: 0,
+            city: '',
+            country: '',
+            description: '',
+            lon: 0,
+            lat: 0,
+            address: ''
+        }
     }
     handleSelectableInput = (id) => {
         const sport = this.sports.find(s => id === s.id)
