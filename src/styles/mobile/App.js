@@ -33,20 +33,34 @@ const styles = StyleSheet.create({
     }, 
     header:{
         flex:1, 
-        width: '100%',          
-        justifyContent: 'flex-end',   
+        width: '100%',    
+        flexDirection:'row',      
+        justifyContent: 'space-around' ,  
+        alignItems:'flex-end',    
         backgroundColor: primary,
-        padding: 20,  
+        paddingBottom:5 , 
+         height:100,  
+         marginBottom:20, 
        
   
     },
     headerTitle:{
-        fontSize: 40,
+        fontSize: 50, 
         textAlign: 'left', 
         fontWeight: '900',
-        color: 'white',  
+        color: 'white', 
+        left: -25,     
 
     },
+    backButtonTouchable:{
+        width:40,
+        height:40
+    },
+    logOutButtonTouchable:{
+        width:40,
+        height:40,
+        alignSelf:'flex-end' 
+    }
  
 });
 
