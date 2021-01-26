@@ -5,7 +5,7 @@ const { primary, secondary,grey } = colors
 const styles = StyleSheet.create({
     feedContainer:{
         width: '100%',
-        padding: 20,
+        padding: 8,
         marginBottom:20,
         backgroundColor:'white'
 
@@ -19,14 +19,9 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: '10%'
      },
-     sinUpBtnText:{
-         color: primary,
-         fontSize:15,
-         fontWeight: '600',
-     },
      feedHeader:{
          width:'100%',
-         height:70,
+         height:50,
          flex:1,
          flexDirection:'row',
          alignItems:'center',
@@ -35,7 +30,7 @@ const styles = StyleSheet.create({
          borderBottomColor: grey,
          borderStyle:'solid',
          borderBottomWidth:1,
-         marginBottom:20,
+    
      },
      profileImage:{
          position:'absolute',
@@ -45,7 +40,7 @@ const styles = StyleSheet.create({
          borderRadius:20,
      },
      feedTitle:{
-        fontSize:30,
+        fontSize:20,
      },
      mapMarkerContainer:{
          zIndex:999999999
@@ -58,6 +53,31 @@ const styles = StyleSheet.create({
          width: 50,
          height:50,
          backgroundColor:secondary
+     },
+     closeBtn:{
+         top:55,
+         right:-10,
+         alignSelf:'flex-end',
+        alignItems:'flex-end',
+        zIndex:99999,
+        width:50,
+        height:50,
+
+     },
+     closeBtnContainer:{
+         width:'100%',
+         height:'100%'
+     },
+     closeBtnTxt:{
+         fontSize:30,
+         zIndex:999,
+         textAlign:'center',
+         color:'grey',
+      
+     },
+     feedContent:{
+         flex:1,
+         flexDirection:'row',
      }
 
 

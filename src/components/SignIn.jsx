@@ -7,19 +7,24 @@ import { styles as webStyles } from '../styles/web/SignIn'
 import { styles as mobileStyles } from '../styles/mobile/SignIn'
 import { inject, observer } from 'mobx-react';
 import SwipableView from './subComponent/SwipableView';
+import Loading from './subComponent/Loading';
 const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user }) => {
     const { signInInputs, handleTextInput } = inputsStore
     const { email, password } = signInInputs
 
     const submit = async () => {
+        navigator.loading(true)
+        console.log(navigator.isLoading);
         const res = await user.sign_in(signInInputs)
 
         if (res.status) {
             navigator.redirect('feeds')
-            user.get_events()
+            await user.get_events()
+            navigator.loading(false)
             inputsStore.emptySignInForm()
         } else {
+            navigator.loading(false)
             Platform.OS === 'web' && alert(res.res)
             Alert.alert(res.res)
             inputsStore.emptySignPassword()
@@ -27,6 +32,7 @@ const SignIn = inject('navigator', 'user', 'inputsStore')(observer(({ navigator,
     }
     return (
         <SwipableView style={styles.signIn}>
+            {navigator.isLoading?<Loading/>:<View/>}
             <View style={styles.logoContainer}>
                 <View style={styles.circle}></View>
                 <Text style={styles.logo}>TeaMate</Text>

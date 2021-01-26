@@ -9,6 +9,7 @@ import Navigation from './src/components/Navigation';
 import UserStore from './src/stores/UserStore'
 import InputsStore from './src/stores/InputsStore';
 import AsyncStorage from '@react-native-community/async-storage';
+import Loading from './src/components/subComponent/Loading';
 
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 const styles = mobileStyles
@@ -30,7 +31,9 @@ export default function App() {
    return(
      <Provider {...stores}>
       <View style={styles.mainContainer}>
-    <SafeAreaView style={styles.container} >
+         
+        
+    <SafeAreaView style={styles.container} > 
 
       <Navigation />
   

@@ -8,6 +8,7 @@ import { FloatingAction } from "react-native-floating-action";
 import { styles as webStyles } from '../styles/web/Feeds'
 import { styles as mobileStyles } from '../styles/mobile/Feeds'
 import EventMenu from './subComponent/EventMenu';
+import Loading from './subComponent/Loading';
 const styles = mobileStyles
 // const styles = (Platform.OS === "web") ? webStyles : mobileStyles
 export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user, navigator }) => {
@@ -18,12 +19,16 @@ export const Feeds = inject('navigator', 'user', 'inputsStore')(observer(({ user
         navigator.hideEventMenu()
     }
     useEffect(() => {
-        user.get_events()
+        navigator.loading(true)
+        user.get_events().then(()=>{
+            navigator.loading(false)
+        })
     }, []) 
 
     return (
 
         <View style={styles.mainFeedsContainer}>
+            {navigator.isLoading?<Loading/>:<View/>}
              <TouchableOpacity style={styles.floatingContainer}>
                 <View style={styles.androidFloating} />
                 <FloatingAction overlayColor={null}

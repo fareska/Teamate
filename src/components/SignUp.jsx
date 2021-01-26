@@ -12,6 +12,7 @@ import { inject, observer } from 'mobx-react';
 import SwipableScrollView from './subComponent/SwipableScrollView'
 import SelectableButton from './subComponent/SelectableButton'
 import MyDatePicker from './subComponent/MyDatePicker'
+import Loading from './subComponent/Loading'
 
 const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
@@ -27,15 +28,20 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
         if (validateInputs(signUpInputs)) {
             return
         }
+        navigator.loading(true)
         const data = { ...signUpInputs }
         const res = await user.sign_up(data)
         if (res) {
+            navigator.loading(false)
             alertMessage('Successful! please sign in with your email and password')
             inputsStore.emptySignUpForm()
             navigator.redirect('signIn')
         }
     }
     return (
+        <View>
+
+            {navigator.isLoading?<Loading/>:<View/>}
         <SwipableScrollView
             style={styles.signUpScrollable}
             contentContainerStyle={styles.signUpScrollableContainer}>
@@ -76,7 +82,7 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
                             form="signUpInputs"
                             property="birthdate"
                             isMaxDate={false}
-                        />
+                            />
                         </View>
                   
 
@@ -151,6 +157,7 @@ export const SignUp = inject('navigator', 'user', 'inputsStore')(observer(({ nav
         </SwipableScrollView>
 
 
+                        </View>
     )
 }))
 
