@@ -8,6 +8,7 @@ import profilIcon from '../../../assets/profileIcon.jpg'
 import { PricingCard } from "react-native-elements";
 import { colors } from '../../styles/COLORS'
 import { useState } from 'react'
+import Comment from './Comment'
 const { primary, secondary } = colors
 const styles = mobileStyles
 const alertMessage = function (msg) {
@@ -19,10 +20,9 @@ const Comments = inject('navigator', 'user', 'inputsStore')(observer(({ navigato
     const [shouldShowComments, setShowComments] = useState(false)
     const [comment,setComment]= useState('')
     const {id: userId,first,last}=user.user
-
+ 
     const loadComments = async () => {
-        // get comments from db using database
-        const res = await null
+        const res = await user.getComments(postId)
         setComments(res)
     }
 
@@ -34,11 +34,13 @@ const Comments = inject('navigator', 'user', 'inputsStore')(observer(({ navigato
         const commentData = {postId, userId, comment, first, last}
         navigator.loading(true)
         const res = await user.addComment(commentData)
+            await loadComments()
        alertMessage(res);
         navigator.loading(false)        
     }
-    const showComments = () => {
+    const showComments = async () => {
         setShowComments(true)
+        await loadComments()
     }
     const hideComments = () => {
         setShowComments(false)
@@ -61,9 +63,11 @@ const Comments = inject('navigator', 'user', 'inputsStore')(observer(({ navigato
                 : <View style={styles.commentsContainer}>
                     <TouchableOpacity style={styles.seeCommentsBtnContainer} onPress={hideComments}>
                         <Text style={styles.seeCommentsText}>Hide comments</Text>
-                        {comments.map((c, i) => <Comment key={i} comment={c} />)}
                     </TouchableOpacity>
-
+                        {comments.map((c, i) => <Comment key={i} commentData={c} />)}
+                        <TouchableOpacity style={styles.seeCommentsBtnContainer} onPress={hideComments}>
+                        <Text style={styles.seeCommentsText}>Hide comments</Text>
+                    </TouchableOpacity>
                 </View>
 
             }

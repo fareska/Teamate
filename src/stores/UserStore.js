@@ -180,6 +180,10 @@ class UserStore {
         const res = await apiManager.addComment(comment)
         return res.data
     }
+    getComments = async (id) => {
+        const res = await apiManager.getComments(id)
+        return res.data
+    }
 
 }
 export default UserStore
