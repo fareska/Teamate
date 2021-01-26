@@ -1,5 +1,6 @@
-import { makeObservable, observable, action, computed } from "mobx"
-
+import { makeObservable, observable, action, computed, runInAction } from "mobx"
+import ApiManager from "../../ApiManager"
+const apiManager = new ApiManager()
 class InputsStore {
     constructor() {
         this.signInInputs = {
@@ -36,7 +37,7 @@ class InputsStore {
         }
         this.countries = countries
         this.sports = sports
-
+        this.getCountries()
         makeObservable(this, {
             signInInputs: observable,
             signUpInputs: observable,
@@ -48,7 +49,9 @@ class InputsStore {
             emptySignInForm: action,
             emptySignPassword: action,
             handleSelectableInput: action,
-            emptyNewEventForm: action
+            emptyNewEventForm: action,
+            getCountries:action,
+            getSports:action,
 
 
         })
@@ -106,6 +109,26 @@ class InputsStore {
         sport.selected = !sport.selected
         const sports = this.sports.filter(s => s.selected).map(s => s.sport)
         this.signUpInputs.sports = sports
+    }
+    getCountries = async ()=>{
+        const res = await apiManager.getCountries()
+        res.sort()
+        const countries = res.map((c,i) => {
+          return { id: i, country: c} 
+        })
+        runInAction(()=>{
+            this.countries=countries
+        })
+    }
+    getSports = async ()=>{
+        const res = await apiManager.getSports()
+        res.sort((a,b)=> a>b)
+        const sports = res.map((s,i) => {
+          return s && { id: i, selected: false, sport: s } 
+        })
+        runInAction(()=>{
+            this.sports=sports
+        })
     }
 
 

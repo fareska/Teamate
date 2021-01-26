@@ -53,9 +53,9 @@ const ProfilePage = inject('navigator', 'user', 'inputsStore')(observer(({ user,
                 </View>
                 <Text style={styles.label}>Sports Interests</Text>
                 <View style={styles.sportsContainer}>
-                    {profile.sport.map(s => {
+                    {profile.sport.map((s,i) => {
                     console.log(s);
-                    return <SelectableButton style={styles} sport={{sport:s}} key={s.id} disableBtn={true}/>})}
+                    return <SelectableButton style={styles} sport={{sport:s}} key={i} disableBtn={true}/>})}
 
                 </View>
 

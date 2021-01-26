@@ -22,8 +22,7 @@ const stores = { navigator, user, inputsStore }
 export default function App() {
 
    isUserSaved()
- useEffect(()=>{
- 
+ useEffect(()=>{ 
   user.getLocationAsync()
 
 

@@ -68,8 +68,7 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                             value={inputsStore.newEventForm.date}
                             onChange={inputsStore.handleTextInput}
                             form="newEventForm"
-                            property="time"
-
+                            property="date"
                             isMaxDate={true}
                         />
 
@@ -77,7 +76,7 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                     <View style={styles.pickerContainer}>
                         <Text style={styles.label}>Time</Text>
                         <MyDatePicker
-                            value={inputsStore.newEventForm.date}
+                            value={inputsStore.newEventForm.time}
                             onChange={inputsStore.handleTextInput}
                             form="newEventForm"
                             property="time"

@@ -69,7 +69,7 @@ const MyDatePicker = inject('inputsStore')(observer(({ form, inputsStore, proper
           value={new Date(value)}
           mode={type || "date"}
           minimumDate={isMaxDate ? Date.now() : null}
-          maximumDate={isMaxDate ? 999999999999999999999 : Date.now()}
+          maximumDate={isMaxDate ? Date.now()+333333333333 : Date.now()}
           accessibilityLabel='birthdate'
           cancelBtnText="Cancel"
           

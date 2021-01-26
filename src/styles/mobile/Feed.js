@@ -77,7 +77,14 @@ const styles = StyleSheet.create({
      },
      feedContent:{
          flex:1,
-         flexDirection:'row',
+         alignItems:'center',
+         justifyContent:'center'
+     },
+     descriptionText:{
+        fontWeight:'600',
+        color: 'grey',
+        marginTop: 10,
+        textAlign:'justify'
      }
 
 

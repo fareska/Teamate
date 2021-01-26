@@ -6,14 +6,14 @@ import { styles as mobileStyles } from '../../styles/mobile/Feed'
 import { FloatingAction } from "react-native-floating-action";
 import profilIcon from '../../../assets/profileIcon.jpg'
 import { PricingCard } from "react-native-elements";
-import {colors} from '../../styles/COLORS'
-const {primary,secondary} = colors
+import { colors } from '../../styles/COLORS'
+const { primary, secondary } = colors
 const styles = mobileStyles
 const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
     Alert.alert(msg)
 }
-const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, user,disableName,disablePartis }) => {
+const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, user, disableName, disablePartis }) => {
     const { id, time, date, description, country, city, frequency, sport, partis, people_num, first, last } = eventFeed
     const askToJoin = async () => {
         navigator.loading(true)
@@ -33,7 +33,7 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
         <View style={styles.feedContainer}>
 
             <View style={styles.feedSubContainer}>
-                {!disableName?<TouchableOpacity onPress={showProfile}>
+                {!disableName ? <TouchableOpacity onPress={showProfile}>
 
                     <View style={styles.feedHeader}>
                         <Image source={profilIcon} style={styles.profileImage} />
@@ -42,29 +42,32 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
                         </View>
                     </View>
 
-                </TouchableOpacity>:<View/>}
+                </TouchableOpacity> : <View />}
 
-            <View style={styles.feedContent}>
+                <View style={styles.feedContent}>
+                    {!(navigator.currentPage==='eventsMap')?
+                        <Text style={styles.descriptionText}>{description}</Text>
+                        :<View/>
+                    }
+                    <PricingCard
+                        button={{ title: "Lets TeaMate!" }}
+                        color={secondary}
+                        containerStyle={{ width: '90%' }}
+                        info={[
+                            "Date: " + new Date(date).toLocaleDateString(),
+                            `Time: ${new Date(time).toLocaleTimeString()} `,
+                            `Recurrence: ${frequency}`,
+                            `${city}, ${country}`
+                        ]}
+                        infoStyle={{}}
+                        onButtonPress={askToJoin}
+                        price={!disablePartis ? `${partis.length}/${people_num}` : `${people_num}`}
+                        pricingStyle={{ color: primary }}
+                        title={sport}
 
-                <PricingCard
-                    button={{ title: "Lets TeaMate!" }}
-                    color={secondary}
-                    containerStyle={{width:'90%'}}
-                    info={[
-                        "Date: " + new Date(date).toLocaleDateString(),
-                        `Time: ${new Date(time).toLocaleTimeString()} `,
-                        `Recurrence: ${frequency}`,
-                        `${city}, ${country}`
-                    ]}
-                    infoStyle={{}}
-                    onButtonPress={askToJoin}
-                    price={!disablePartis?`${partis.length}/${people_num}`:`${people_num}`}
-                    pricingStyle={{ color:primary}}
-                    title={sport}
-                   
-                    wrapperStyle={{ padding: 2 }}
+                        wrapperStyle={{ padding: 2 }}
                     />
-                    </View>
+                </View>
             </View>
         </View>
     )
