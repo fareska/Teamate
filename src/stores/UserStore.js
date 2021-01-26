@@ -185,6 +185,7 @@ class UserStore {
         return res.data
     }
     deleteComment = async (id) => {
+        console.log(id+ '----------'); 
         const res = await apiManager.deleteComment(id)
         return res
     }

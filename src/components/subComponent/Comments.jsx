@@ -29,7 +29,7 @@ const Comments = inject('navigator', 'user', 'inputsStore')(observer(({ navigato
 
     const handleInput = (e) => {
         setComment(e)
-        console.log(comment);
+     
     }
     const addComment = async () => {
         const commentData = { postId, userId, comment, first, last }

@@ -19,13 +19,13 @@ const alertMessage = function (msg) {
 }
 const Comment = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user, commentData, loadComments }) => {
     const { first, last, u_id, comment, id } = commentData
-   
+  
+
     const deleteComment = async () => {
-        await user.deleteComment(id)
+        await user.deleteComment(commentData.id)
         await loadComments()
     }
-    
-    console.log(user.user.id, u_id);
+
     return (
         <View style={styles.commentMainContainer}>
             <Image source={profilePic} style={styles.profileImage} />

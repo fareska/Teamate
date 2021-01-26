@@ -69,16 +69,16 @@ class ApiManager {
         } catch (err) { return err }
     }
     getComments = async (id) => {
-        console.log(id);
         try {
             const res = await axios.get(`${this.sPath}/post/comment/${id}`)
             return res
         } catch (err) { return err }
     }
 
-    deleteComment = async id => {
+    deleteComment = async dataId => {
+        console.log(dataId + "******************");
         try {
-            const res = await axios.delete(`${this.sPath}/post/comment/${id}`)
+            const res = await axios.delete(`${this.sPath}/post/comment/${dataId}`)
             return res
         } catch (err) { return err }
     }
