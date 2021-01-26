@@ -6,8 +6,8 @@ const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   flag:{
-        width: 30,
-        height:30
+        width: 40,
+        height:40
     },
     container: {
         position: "absolute",
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         bottom: 0,
     },showEventContainer:{
         position:'absolute',
-        bottom:0,
+        bottom:-20,
         width:'100%',
         zIndex:9999999
     }

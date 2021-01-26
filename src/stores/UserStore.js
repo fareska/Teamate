@@ -102,9 +102,9 @@ class UserStore {
         if (events)
             events.sort((e1, e2) => {
                 if (sportsObj[e1.sport] && !sportsObj[e2.sport])
-                    return 1
-                else if (sportsObj[e2.sport] && !sportsObj[e1.sport])
                     return -1
+                else if (sportsObj[e2.sport] && !sportsObj[e1.sport])
+                    return 1
                 return 0
             })
         runInAction(() => {

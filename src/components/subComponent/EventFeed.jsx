@@ -5,14 +5,16 @@ import { styles as webStyles } from '../../styles/web/Feed'
 import { styles as mobileStyles } from '../../styles/mobile/Feed'
 import { FloatingAction } from "react-native-floating-action";
 import profilIcon from '../../../assets/profileIcon.jpg'
-import Loading from './Loading'
+import { PricingCard } from "react-native-elements";
+import {colors} from '../../styles/COLORS'
+const {primary,secondary} = colors
 const styles = mobileStyles
 const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
     Alert.alert(msg)
 }
 const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, user }) => {
-    const { id, time, date, description, country, city, frequency, sport, partis,people_num } = eventFeed
+    const { id, time, date, description, country, city, frequency, sport, partis, people_num, first, last } = eventFeed
     const askToJoin = async () => {
         navigator.loading(true)
         const res = await user.askToJoin(user.user.id, id)
@@ -21,38 +23,46 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
             alertMessage(res.data)
         }
     }
-    const showProfile =async ()=>{
+    const showProfile = async () => {
         await user.get_profile_by_id(eventFeed.user_id)
-        navigator.redirect('profilePage',eventFeed.user_id)
+        navigator.redirect('profilePage', eventFeed.user_id)
     }
     return (
         <View style={styles.feedContainer}>
-              
+
             <View style={styles.feedSubContainer}>
                 <TouchableOpacity onPress={showProfile}>
 
-                <View style={styles.feedHeader}>
-                    <Image source={profilIcon} style={styles.profileImage} />
-                    <View >
-                        <Text style={styles.feedTitle}>{sport}</Text>
+                    <View style={styles.feedHeader}>
+                        <Image source={profilIcon} style={styles.profileImage} />
+                        <View >
+                            <Text style={styles.feedTitle}>    {first} {last}</Text>
+                        </View>
                     </View>
-                </View>
-                </TouchableOpacity>
-                <View style={styles.feedContent}>
 
-                </View>
-                <Text>{description}</Text>
-
-                <Text>{`${city}, ${country}`}</Text>
-                <Text>{"Date: " + new Date(date).toLocaleDateString()}</Text>
-                <Text>{`Time: ${new Date(time).toLocaleTimeString()} `}</Text>
-                <Text>{`Recurrence: ${frequency}`}</Text>
-                <Text>{`Number of Participant: ${partis.length}/${people_num}`}</Text>
-                <TouchableOpacity onPress={askToJoin} style={styles.signUpBtn}>
-                    <Text style={styles.sinUpBtnText}>
-                        Ask to join
-                         </Text>
                 </TouchableOpacity>
+
+            <View style={styles.feedContent}>
+
+                <PricingCard
+                    button={{ title: "Lets TeaMate!" }}
+                    color={secondary}
+                    containerStyle={{width:'90%'}}
+                    info={[
+                        "Date: " + new Date(date).toLocaleDateString(),
+                        `Time: ${new Date(time).toLocaleTimeString()} `,
+                        `Recurrence: ${frequency}`,
+                        `${city}, ${country}`
+                    ]}
+                    infoStyle={{}}
+                    onButtonPress={askToJoin}
+                    price={`${partis.length}/${people_num}`}
+                    pricingStyle={{ color:primary}}
+                    title={sport}
+                   
+                    wrapperStyle={{ padding: 2 }}
+                    />
+                    </View>
             </View>
         </View>
     )
