@@ -9,7 +9,7 @@ import { PricingCard } from "react-native-elements";
 import { colors } from '../../styles/COLORS'
 import { useState } from 'react'
 import profilePic from '../../../assets/profileIcon.jpg'
-
+import { Feather } from '@expo/vector-icons';
 
 const { primary, secondary } = colors
 const styles = mobileStyles
@@ -17,24 +17,36 @@ const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
     Alert.alert(msg)
 }
-const Comment = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user, commentData }) => {
-    const { first, last, u_id, comment } = commentData
+const Comment = inject('navigator', 'user', 'inputsStore')(observer(({ navigator, inputsStore, user, commentData, loadComments }) => {
+    const { first, last, u_id, comment, id } = commentData
+   
+    const deleteComment = async () => {
+        await user.deleteComment(id)
+        await loadComments()
+    }
+    
     console.log(user.user.id, u_id);
     return (
-        <View style={styles.commentContainer}>
+        <View style={styles.commentMainContainer}>
+            <Image source={profilePic} style={styles.profileImage} />
 
-            {(user.user.id + "" === u_id + "") ?
-                <Text style={styles.label}>You:
+            <View style={styles.commentContainer}>
+
+                {(user.user.id + "" === u_id + "") ?
+                    <Text style={styles.label}>You:
             </Text> : <Text style={styles.label}>{first} {last}:
             </Text>
-            }
-            <Text>{comment}</Text>
+                }
+                <Text>{comment}</Text>
 
-            {(user.user.id + "" === u_id + "") ?
-            <View style={styles.deleteBtn}> 
-            <Text>delete</Text> 
-            </View>: <View />}
+                {(user.user.id + "" === u_id + "") ?
+                    <View style={styles.deleteBtn}>
+                        <TouchableOpacity onPress={deleteComment}>
+                            <Feather name="trash" size={24} color="black" />
+                        </TouchableOpacity>
+                    </View> : <View />}
 
+            </View>
         </View>
     )
 }))

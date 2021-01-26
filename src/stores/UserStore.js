@@ -176,13 +176,17 @@ class UserStore {
 
     }
     addComment = async (comment) => {
-      
+
         const res = await apiManager.addComment(comment)
         return res.data
     }
     getComments = async (id) => {
         const res = await apiManager.getComments(id)
         return res.data
+    }
+    deleteComment = async (id) => {
+        const res = await apiManager.deleteComment(id)
+        return res
     }
 
 }

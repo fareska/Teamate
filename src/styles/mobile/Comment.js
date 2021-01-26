@@ -3,8 +3,14 @@ import { colors } from '../COLORS'
 const { primary, secondary, grey } = colors
 
 const styles = StyleSheet.create({
+    commentMainContainer:{
+        width:'100%',
+        flex:1,
+        flexDirection:'row',
+        justifyContent: 'space-evenly',
+    },
     commentContainer: {
-        width: '80%',
+        width: '75%',
         padding:20,
         backgroundColor:grey,
         borderRadius:8, 
@@ -20,6 +26,12 @@ const styles = StyleSheet.create({
     },
     deleteBtn:{
         alignSelf:"flex-end"
+    },
+    profileImage:{
+        width:46,
+        height:46,
+        borderRadius:23
+
     }
 
 });
