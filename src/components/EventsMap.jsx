@@ -21,12 +21,13 @@ const styles = mobileStyles
 
 
 
+
 const EventsMap = inject('inputsStore', 'user', 'navigator')(observer((props) => {
     const { events } = props.user
     const [eventToShow, setEventToShow] = useState({})
     const [showEvent, setShowEvent] = useState(false)
-    const {currentCoordinates} = props.user
-  const location ={...currentCoordinates }
+    const { currentCoordinates } = props.user
+    const location = { ...currentCoordinates }
 
     const camera = {
         center: location,
@@ -36,7 +37,7 @@ const EventsMap = inject('inputsStore', 'user', 'navigator')(observer((props) =>
         zoom: 10
 
     }
-    const showSelectedEvent = (target)=>{
+    const showSelectedEvent = (target) => {
         setShowEvent(true)
         setEventToShow(target)
 
@@ -51,14 +52,15 @@ const EventsMap = inject('inputsStore', 'user', 'navigator')(observer((props) =>
                 position: 'absolute',
                 zIndex: 9999
             }}>
-            {props.navigator.isLoading ? <Loading /> : <View />}
+                {props.navigator.isLoading ? <Loading /> : <View />}
 
 
-                <AppHeader viewMapBtn={false} viewLogoutBtn={false} viewBackButton={true}/>
+                <AppHeader viewMapBtn={false} viewLogoutBtn={false} viewBackButton={true} />
+                
             </View>
             {showEvent ?
                 <View style={styles.showEventContainer}>
-                    <MapMarker eventFeed={eventToShow} setShowEvent={setShowEvent}/>
+                    <MapMarker eventFeed={eventToShow} setShowEvent={setShowEvent} />
                 </View> : <View />}
             <View style={styles.container}>
 

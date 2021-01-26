@@ -13,7 +13,7 @@ const alertMessage = function (msg) {
     Platform.OS === 'web' && alert(msg)
     Alert.alert(msg)
 }
-const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, user }) => {
+const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, user,disableName,disablePartis }) => {
     const { id, time, date, description, country, city, frequency, sport, partis, people_num, first, last } = eventFeed
     const askToJoin = async () => {
         navigator.loading(true)
@@ -24,14 +24,16 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
         }
     }
     const showProfile = async () => {
+        navigator.loading(true)
         await user.get_profile_by_id(eventFeed.user_id)
+        navigator.loading(false)
         navigator.redirect('profilePage', eventFeed.user_id)
     }
     return (
         <View style={styles.feedContainer}>
 
             <View style={styles.feedSubContainer}>
-                <TouchableOpacity onPress={showProfile}>
+                {!disableName?<TouchableOpacity onPress={showProfile}>
 
                     <View style={styles.feedHeader}>
                         <Image source={profilIcon} style={styles.profileImage} />
@@ -40,7 +42,7 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
                         </View>
                     </View>
 
-                </TouchableOpacity>
+                </TouchableOpacity>:<View/>}
 
             <View style={styles.feedContent}>
 
@@ -56,7 +58,7 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
                     ]}
                     infoStyle={{}}
                     onButtonPress={askToJoin}
-                    price={`${partis.length}/${people_num}`}
+                    price={!disablePartis?`${partis.length}/${people_num}`:`${people_num}`}
                     pricingStyle={{ color:primary}}
                     title={sport}
                    

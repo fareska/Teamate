@@ -8,15 +8,19 @@ const styles = StyleSheet.create({
     EventMenu:{
         width:'100%',
         backgroundColor: primary,
+        paddingLeft:20,
+        paddingRight:20,
         zIndex:999
     },
     evenMenuContainer:{
         backgroundColor:grey,
+        
         alignItems: 'center',
     },
     titleContainer: {
         width: "100%",
         justifyContent: 'flex-end',
+        padding:20,
         marginTop: 30,
         marginBottom: 30,
     },
@@ -33,7 +37,7 @@ const styles = StyleSheet.create({
 
     eventInputsContainer: {
         width: "100%",
-        padding:20,
+        padding:30,
         alignItems: 'flex-start',
         flexDirection: 'column',
         justifyContent: 'space-evenly',

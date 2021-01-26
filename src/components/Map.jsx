@@ -9,7 +9,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 const map = inject('inputsStore', 'user')(observer((props) => {
   const { newEventForm, handleTextInput } = props.inputsStore
   const {currentCoordinates} = props.user
-  const location ={...currentCoordinates }
+  const location = {...currentCoordinates }
   const markerTA = {
     latitude: newEventForm.lat,
     longitude: newEventForm.lon,

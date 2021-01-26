@@ -14,7 +14,12 @@ class UserStore {
         this.match = []
         this.events = []
         this.profile = {}
-        this.currentCoordinates = {}
+        this.currentCoordinates = {
+            latitude:31.7683,
+            longitude:35.2137,
+            latitudeDelta: 31.7683,
+            longitudeDelta: 35.2137
+        }
         makeAutoObservable(this, {
             user: observable,
             friends: observable,
@@ -29,7 +34,7 @@ class UserStore {
             askToJoin: action,
             get_profile_by_id: action,
             profile: observable,
-            currentCoordinates:observable,
+            currentCoordinates: observable,
             getLocationAsync: action
 
         })
@@ -154,21 +159,21 @@ class UserStore {
     getLocationAsync = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
-          return {
-            error: 'Permission to access location was denied',
-          }
+            return {
+                error: 'Permission to access location was denied',
+            }
         }
-      
+
         let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
         const { latitude, longitude } = location.coords
-        
-        runInAction(()=>{
+
+        runInAction(() => {
 
             this.currentCoordinates = { latitude, longitude, latitudeDelta: latitude, longitudeDelta: longitude }
         })
-        
-      
-      };
+
+
+    };
 
 }
 export default UserStore
