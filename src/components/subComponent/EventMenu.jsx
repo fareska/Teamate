@@ -133,6 +133,7 @@ const EventMenu = inject('navigator', 'user', 'inputsStore')(observer(({ navigat
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Description</Text>
                         <TextInput textAlign='center'
+                        multiline={true}
                             value={description} onChangeText={(value) => handleTextInput('newEventForm', 'description', value)}
                             textContentType="username" style={styles.input}
                         />

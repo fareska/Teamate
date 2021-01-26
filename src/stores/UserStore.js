@@ -15,8 +15,8 @@ class UserStore {
         this.events = []
         this.profile = {}
         this.currentCoordinates = {
-            latitude:31.7683,
-            longitude:35.2137,
+            latitude: 31.7683,
+            longitude: 35.2137,
             latitudeDelta: 31.7683,
             longitudeDelta: 35.2137
         }
@@ -35,7 +35,8 @@ class UserStore {
             get_profile_by_id: action,
             profile: observable,
             currentCoordinates: observable,
-            getLocationAsync: action
+            getLocationAsync: action,
+            addComment: action
 
         })
     }
@@ -173,7 +174,12 @@ class UserStore {
         })
 
 
-    };
+    }
+    addComment = async (comment) => {
+      
+        const res = await apiManager.addComment(comment)
+        return res.data
+    }
 
 }
 export default UserStore

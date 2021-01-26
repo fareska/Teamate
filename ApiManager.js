@@ -62,6 +62,7 @@ class ApiManager {
     }
 
     addComment = async data => {
+        
         try {
             const res = await axios.post(`${this.sPath}/post/comment`, data)
             return res

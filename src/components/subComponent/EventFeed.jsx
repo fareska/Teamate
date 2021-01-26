@@ -7,6 +7,7 @@ import { FloatingAction } from "react-native-floating-action";
 import profilIcon from '../../../assets/profileIcon.jpg'
 import { PricingCard } from "react-native-elements";
 import { colors } from '../../styles/COLORS'
+import Comments from './Comments'
 const { primary, secondary } = colors
 const styles = mobileStyles
 const alertMessage = function (msg) {
@@ -31,7 +32,7 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
     }
     return (
         <View style={styles.feedContainer}>
-
+          
             <View style={styles.feedSubContainer}>
                 {!disableName ? <TouchableOpacity onPress={showProfile}>
 
@@ -43,7 +44,6 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
                     </View>
 
                 </TouchableOpacity> : <View />}
-
                 <View style={styles.feedContent}>
                     {!(navigator.currentPage==='eventsMap')?
                         <Text style={styles.descriptionText}>{description}</Text>
@@ -67,6 +67,7 @@ const EventFeed = inject('navigator', 'user')(observer(({ navigator, eventFeed, 
 
                         wrapperStyle={{ padding: 2 }}
                     />
+                          {!(navigator.currentPage==='eventsMap')?<Comments eventId={id}/>:<View/>}
                 </View>
             </View>
         </View>
